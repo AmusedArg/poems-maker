@@ -1,0 +1,111 @@
+@import './custom.scss';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.poem-day-container {
+  background-color: #282c34;
+  color: $white;
+  font-family: 'Amatic SC', cursive;
+  font-weight: 100;
+  font-size: 2.5rem;
+  .title {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 100;
+    position: absolute;
+  }
+  .poem-day-author {
+    font-weight: 400; 
+  }
+  .poem-day-book {
+    font-size: 1.3rem;
+    color: $secondary;
+  }
+  .jam-chevron-down {
+    position: absolute;
+    font-size: 4rem;
+    color: $primary;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 4rem;
+    text-decoration: none;
+  }
+}
+
+.poems-cards-container {
+}
+
+.poem-title {
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.8rem;
+}
+.poem-author {
+  font-style: normal;
+  font-size: 1.5rem;
+  font-family: 'Dancing Script', cursive;
+}
+
+.poem-card .card-text {
+  font-style: italic;
+}
+
+.poem-card::first-letter {
+  text-transform: capitalize;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-in {
+  animation: fadeIn ease 5s;
+  -webkit-animation: fadeIn ease 5s;
+  -moz-animation: fadeIn ease 5s;
+  -o-animation: fadeIn ease 5s;
+  -ms-animation: fadeIn ease 5s;
+  }
+
+  @keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+  
+  @-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+  
+  @-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+  
+  @-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }
+  
+  @-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+  }

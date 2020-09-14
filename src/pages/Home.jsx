@@ -22,10 +22,10 @@ const Home = () => {
     }
     return ( 
         <Fragment>
-            <div className="container-fluid poem-day-container d-flex h-100 ">
+            <div className="container-fluid poem-day-container d-flex h-100 mb-5">
                 <span className="title d-none d-md-block">Poema del día</span>
                 <PoemOfDay poem={poemOfTheDay}></PoemOfDay>
-                <a href="#poems-cards" className="jam jam-chevron-down">&nbsp;</a>
+                <a href="#poems-cards" className="jam jam-chevron-down d-none d-lg-block">&nbsp;</a>
             </div>
             <div className="container poems-cards-container">
                 <Poems showFull={false}></Poems>

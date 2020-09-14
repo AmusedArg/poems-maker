@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
 import React from 'react';
 import ScrollReveal from 'scrollreveal'
 
@@ -31,6 +32,11 @@ const Poem = ({poem, showFull}) => {
                     showFull && 
                     <div className="text-right">
                         <span className="poem-author">{poem.author}</span>
+                        <div className="social-links-container">
+                            { poem.instagram && <a href={poem.instagram} target="_blank" rel="noopener noreferrer" className="social-icon jam jam-instagram"></a> }
+                            { poem.twitter && <a href={poem.twitter} target="_blank" rel="noopener noreferrer" className="social-icon jam jam-twitter"></a> }
+                            { poem.website && <a href={poem.website} target="_blank" rel="noopener noreferrer" className="social-icon jam jam-world"></a> }
+                        </div>
                     </div>
                 }   
                 { 

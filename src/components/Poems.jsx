@@ -25,6 +25,9 @@ const Poems = ({showFull}) => {
                     poem = {
                             id: poem.id,
                             author: poem.author,
+                            website: poem.website,
+                            twitter: poem.twitter,
+                            instagram: poem.instagram,
                             title: poem.title,
                             paragraphs: poem.paragraphs,
                             randomParagraph: poem.paragraphs[pos].text,

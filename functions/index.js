@@ -23,6 +23,9 @@ const getRandomPoem = (data) => {
         fullText: fullText,
         paragraphs: randomPoem.paragraphs,
         author: randomPoem.author,
+        website: randomPoem.website,
+        twitter: randomPoem.twitter,
+        instagram: randomPoem.instagram,
         title: randomPoem.title
     };
 }

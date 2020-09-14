@@ -25,10 +25,13 @@ const Poems = ({showFull}) => {
                     poem = {
                             id: poem.id,
                             author: poem.author,
+                            website: poem.website,
+                            twitter: poem.twitter,
+                            instagram: poem.instagram,
                             title: poem.title,
                             paragraphs: poem.paragraphs,
                             randomParagraph: poem.paragraphs[pos].text,
-                            fullText: poem.paragraphs.map(function(elem){
+                            fullText: poem.paragraphs.map((elem) => {
                                 return elem.text;
                             }).join("<br><br>")
                     }

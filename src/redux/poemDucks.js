@@ -48,6 +48,9 @@ export const getPoemAction = (id) => async (dispatch, getState) => {
         const poem = {
             id: res.data.id,
             author: res.data.author,
+            website: res.data.website,
+            twitter: res.data.twitter,
+            instagram: res.data.instagram,
             title: res.data.title,
             paragraphs: res.data.paragraphs,
             fullText: res.data.paragraphs.map(function(elem){
@@ -72,6 +75,9 @@ export const getRandomPoemAction = () => async (dispatch, getState) => {
         const poem = {
             id: res.data.id,
             author: res.data.author,
+            website: res.data.website,
+            twitter: res.data.twitter,
+            instagram: res.data.instagram,
             title: res.data.title,
             paragraphs: res.data.paragraphs,
             fullText: res.data.paragraphs.map(function(elem){

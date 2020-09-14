@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React from 'react';
+import React, { Fragment } from 'react';
 import ScrollReveal from 'scrollreveal'
 
 const Poem = ({poem, showFull}) => {
@@ -27,7 +27,25 @@ const Poem = ({poem, showFull}) => {
                 </div>
             }
             <div className="card-body">
-                <p className="card-text" dangerouslySetInnerHTML={{__html: text}}></p>
+                <div className="card-text">
+                    {   showFull
+                        ? poem.paragraphs?.map((elem, i) => {
+                            return (
+                                <Fragment key={i}>
+                                    <div className="poem-paragraph">
+                                        {elem.text}
+                                    </div>
+                                    <br/>
+                                </Fragment>
+                            )
+                        })
+                        :   <Fragment>
+                                <div className="poem-paragraph">
+                                {text}<br/><br/>
+                                </div>
+                            </Fragment>
+                    }
+                </div>
                 {
                     showFull && 
                     <div className="text-right">

@@ -31,7 +31,7 @@ const Poems = ({showFull}) => {
                             title: poem.title,
                             paragraphs: poem.paragraphs,
                             randomParagraph: poem.paragraphs[pos].text,
-                            fullText: poem.paragraphs.map(function(elem){
+                            fullText: poem.paragraphs.map((elem) => {
                                 return elem.text;
                             }).join("<br><br>")
                     }

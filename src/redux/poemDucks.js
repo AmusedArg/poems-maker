@@ -48,7 +48,7 @@ export function createPoemOfTheDay(poem) {
     return {    
         type: GET_POEM_DAY_SUCCESS, 
         payload: {
-            poem: poem
+            poemOfTheDay: poem
         }
     };
 }

@@ -1,17 +1,17 @@
 import axios from "axios";
 
-// constants
+// Constants
 const dataInicial = {
     poem: '',
     poemOfTheDay: ''
 }
 
-// types
+// Types
 const GET_POEM_SUCCESS = 'GET_POEM_SUCCESS';
 const GET_RANDOM_POEM_SUCCESS = 'GET_RANDOM_POEM_SUCCESS';
 const GET_POEM_DAY_SUCCESS = 'GET_POEM_DAY_SUCCESS';
 
-// reducer
+// Reducer
 export default function poemReducer(state = dataInicial, action) {
     switch (action.type) {
         case GET_RANDOM_POEM_SUCCESS:
@@ -25,17 +25,40 @@ export default function poemReducer(state = dataInicial, action) {
     }
 }
 
-// actions
+// Action Creators
+export function createRandomPoem(poem) {
+    return {    
+        type: GET_RANDOM_POEM_SUCCESS, 
+        payload: {
+            poem: poem
+        }
+    };
+}
+
+export function createPoem(poem) {
+    return {    
+        type: GET_POEM_SUCCESS, 
+        payload: {
+            poem: poem
+        }
+    };
+}
+
+export function createPoemOfTheDay(poem) {
+    return {    
+        type: GET_POEM_DAY_SUCCESS, 
+        payload: {
+            poem: poem
+        }
+    };
+}
+
+// Methods
 export const getPoemOfTheDayAction = () => async (dispatch, getState) => {
 
     try {
         const res = await axios.get(`https://poemasmaker.firebaseio.com/poemOfTheDay.json`);
-        dispatch({
-            type: GET_POEM_DAY_SUCCESS,
-            payload: {
-                poemOfTheDay: res.data
-            }
-        });
+        dispatch(createPoemOfTheDay(res.data));
     } catch (e) {
         console.error(e);
     }
@@ -57,12 +80,7 @@ export const getPoemAction = (id) => async (dispatch, getState) => {
                 return elem.text;
             }).join("<br><br>")
         }
-        dispatch({
-            type: GET_POEM_SUCCESS,
-            payload: {
-                poem: poem
-            }
-        });
+        dispatch(createPoem(poem));
     } catch (e) {
         console.error(e);
     }
@@ -84,12 +102,7 @@ export const getRandomPoemAction = () => async (dispatch, getState) => {
                 return elem.text;
             }).join("<br><br>")
         }
-        dispatch({
-            type: GET_RANDOM_POEM_SUCCESS,
-            payload: {
-                poem: poem
-            }
-        });
+        dispatch(createRandomPoem(poem));
     } catch (e) {
         console.error(e);
     }

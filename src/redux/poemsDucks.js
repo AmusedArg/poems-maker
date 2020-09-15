@@ -18,6 +18,16 @@ export default function poemsReducer(state = dataInicial, action) {
     }
 }
 
+// Action creators
+export function listPoems(list) {
+    return {
+        type: GET_POEMS_SUCCESS,
+        payload: {
+            list: list
+        }
+    };
+}
+
 // actions
 export const getPoemsAction = () => async (dispatch, getState) => {
 
@@ -41,12 +51,7 @@ export const getPoemsAction = () => async (dispatch, getState) => {
                     list.push(element);
                 }
             }
-            dispatch({
-                type: GET_POEMS_SUCCESS,
-                payload: {
-                    list: list
-                }
-            });
+            dispatch(listPoems(list));
         }
     } catch (e) {
         console.error(e);

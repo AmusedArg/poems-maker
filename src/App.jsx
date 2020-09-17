@@ -38,7 +38,7 @@ function App() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <NavLink to="/" className="nav-link" activeClassName="active">Home</NavLink>
+              <NavLink to="/" className="nav-link" activeClassName="active">Inicio</NavLink>
             </li>
             <li className="nav-item">
               <NavLink to="/poems" className="nav-link" activeClassName="active">Poemas</NavLink>

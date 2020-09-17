@@ -11,7 +11,7 @@ import GoTopButton from './GoTopButton';
 
 
 const Poems = ({showFull}) => {
-    const searchClient = algoliasearch('BSJX5TTZV0', '0a9741b44edd02761e785312932bed41');
+    const searchClient = algoliasearch('BSJX5TTZV0', 'cefb7f2f5e85c4db06adbb1e58bf2e0b');
 
     const dispatch = useDispatch();
 

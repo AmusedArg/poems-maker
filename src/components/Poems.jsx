@@ -1,9 +1,10 @@
 import algoliasearch from 'algoliasearch/lite';
 import React, { Fragment } from 'react';
-import { connectHits, InstantSearch, PoweredBy, SearchBox } from 'react-instantsearch-dom';
+import { connectHits, InstantSearch, PoweredBy } from 'react-instantsearch-dom';
 // hooks react redux
 import { useDispatch, useSelector } from 'react-redux';
 import { getPoemsAction } from '../redux/poemsDucks';
+import DebouncedSearchBox from './DebouncedSearchBox';
 import Poem from './Poem';
 import PoemHits from './PoemHits';
 
@@ -27,11 +28,12 @@ const Poems = ({showFull}) => {
         <Fragment>
             {   showFull ?
                 <InstantSearch searchClient={searchClient} indexName="dev_POEMS">
-                    <SearchBox translations={{
+                    <DebouncedSearchBox delay={1000} />
+                    {/* <SearchBox translations={{
                         submitTitle: 'Buscar',
                         resetTitle: 'Cancelar',
                         placeholder: 'Buscar autores, poemas, títulos...',
-                    }}/>
+                    }}/> */}
                     <PoweredBy />
                     <CustomHits/>
                 </InstantSearch>

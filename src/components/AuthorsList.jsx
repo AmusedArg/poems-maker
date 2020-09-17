@@ -12,13 +12,13 @@ const AuthorsList = () => {
     
     return ( 
         <Fragment>
-            <ol className="authors-list">
+            <div className="authors-list">
             {
                 poems.map(p => {
                   return <li key={p.id}><span>{p.author}</span></li>;
                 })
             }
-            </ol>
+            </div>
         </Fragment>
      );
 }

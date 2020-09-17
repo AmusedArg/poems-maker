@@ -10,7 +10,8 @@ const PoemHits = ({hits}) => {
                         poem['id'] = poem.objectID;
                         poem['paragraphs'] = poem.content;
                         delete poem.content;
-                        return <Poem poem={poem} key={poem.objectID} showFull={true}></Poem>
+                        delete poem.objectID;
+                        return <Poem poem={poem} key={poem.id} showFull={true}></Poem>
                     })
                 }
             </div>

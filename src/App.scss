@@ -83,6 +83,21 @@ body {
   text-transform: capitalize;
 }
 
+.go-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  button {
+    background-color: transparent;
+    border: none;
+    font-size: 3.5rem;
+    color: $secondary;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

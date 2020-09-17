@@ -15,7 +15,7 @@ const AuthorsList = () => {
             <div className="authors-list">
             {
                 poems.map(p => {
-                  return <li key={p.id}><span>{p.author}</span></li>;
+                  return <li key={p.id}><a href={`/poems/author/${p.author}`}>{p.author}</a></li>;
                 })
             }
             </div>

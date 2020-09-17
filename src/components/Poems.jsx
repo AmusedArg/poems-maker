@@ -7,6 +7,7 @@ import { getPoemsAction } from '../redux/poemsDucks';
 import DebouncedSearchBox from './DebouncedSearchBox';
 import Poem from './Poem';
 import PoemHits from './PoemHits';
+import GoTopButton from './GoTopButton';
 
 
 const Poems = ({showFull}) => {
@@ -26,17 +27,20 @@ const Poems = ({showFull}) => {
 
     return (
         <Fragment>
-            {   showFull ?
-                <InstantSearch searchClient={searchClient} indexName="dev_POEMS">
-                    <DebouncedSearchBox delay={1000} />
-                    {/* <SearchBox translations={{
-                        submitTitle: 'Buscar',
-                        resetTitle: 'Cancelar',
-                        placeholder: 'Buscar autores, poemas, títulos...',
-                    }}/> */}
-                    <PoweredBy />
-                    <CustomHits/>
-                </InstantSearch>
+            {   showFull ? 
+                <Fragment>
+                    <InstantSearch searchClient={searchClient} indexName="dev_POEMS">
+                        <DebouncedSearchBox delay={1000} />
+                        {/* <SearchBox translations={{
+                            submitTitle: 'Buscar',
+                            resetTitle: 'Cancelar',
+                            placeholder: 'Buscar autores, poemas, títulos...',
+                        }}/> */}
+                        <PoweredBy />
+                        <CustomHits/>
+                    </InstantSearch>
+                    <GoTopButton />
+                </Fragment>
                 : <div id="poems-cards" className="card-columns mt-3">
                     {
                         poems.map(poem =>

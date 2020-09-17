@@ -1,17 +1,18 @@
-import './App.scss';
 import React, { Fragment } from 'react';
-import generateStore from './redux/store';
 import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink
+
+
+  NavLink, Route, Switch
 } from "react-router-dom";
-import Home from './pages/Home';
+import './App.scss';
 import Poems from './components/Poems';
+import Home from './pages/Home';
+import PoemAuthorPage from './pages/PoemAuthorPage';
 import PoemPage from './pages/PoemPage';
 import RandomPoemPage from './pages/RandomPoemPage';
+import generateStore from './redux/store';
 
 const AppWrapper = () => {
   const store = generateStore();
@@ -56,8 +57,11 @@ function App() {
             <Poems showFull={true} />
           </div>
         </Route>
-        <Route path="/poems/:id">
+        <Route exact path="/poems/:id">
           <PoemPage />
+        </Route>
+        <Route exact path="/poems/author/:name">
+          <PoemAuthorPage />
         </Route>
         <Route path="/random">
           <RandomPoemPage />

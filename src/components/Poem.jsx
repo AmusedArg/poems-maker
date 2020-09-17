@@ -23,7 +23,7 @@ const Poem = ({poem, showFull}) => {
             {
                 showFull &&
                 <div className="card-header bg-secondary poem-title text-center font-weight-bold">
-                    {poem.id ? <a href={`/poems/${poem.id}`}>{poem.title}</a> : poem.title}
+                    {(poem.id) ? <a href={`/poems/${poem.id}`}>{poem.title}</a> : poem.title}
                 </div>
             }
             <div className="card-body">

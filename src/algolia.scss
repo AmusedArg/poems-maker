@@ -1,0 +1,17 @@
+.ais-SearchBox {
+    width: 50%;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    input {
+        outline-offset: 0px;
+        &:focus {
+            border-color: $primary !important;
+            outline: none;
+        }
+    }
+}
+
+.ais-PoweredBy{
+    justify-content: flex-end;
+}

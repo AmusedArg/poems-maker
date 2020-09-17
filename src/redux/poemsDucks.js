@@ -30,7 +30,6 @@ export function listPoems(list) {
 
 // actions
 export const getPoemsAction = () => async (dispatch, getState) => {
-
     try {
         if (window.localStorage) {
             const cachedPoems = JSON.parse(window.localStorage.getItem('poems'));
@@ -43,16 +42,45 @@ export const getPoemsAction = () => async (dispatch, getState) => {
             } else {
                 poems = cachedPoems;
             }
-            const list = [];        
+            const list = [];
             for (const key in poems) {
                 if (poems.hasOwnProperty(key)) {
                     const element = poems[key];
                     element['id'] = key;
+                    const pos = Math.floor(Math.random() * element.paragraphs.length-1) + 1;
+                    element['randomParagraph'] = element.paragraphs[pos].text;
+                    element['fullText'] = element.paragraphs.map((elem) => {
+                            return elem.text;
+                        }).join("<br><br>");
                     list.push(element);
                 }
             }
             dispatch(listPoems(list));
         }
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+export const searchPoem = (filter) => async (dispatch, getState) => {
+    try {
+        let poems;
+        const res = await axios.get(`https://poemasmaker.firebaseio.com/poems.json?orderBy="indexes"&startAt="${filter}"&endAt="${filter}\uf8ff"`);
+        poems = res.data;
+        const list = [];
+        for (const key in poems) {
+            if (poems.hasOwnProperty(key)) {
+                const element = poems[key];
+                element['id'] = key;
+                const pos = Math.floor(Math.random() * element.paragraphs.length-1) + 1;
+                element['randomParagraph'] = element.paragraphs[pos].text;
+                element['fullText'] = element.paragraphs.map((elem) => {
+                        return elem.text;
+                    }).join("<br><br>");
+                list.push(element);
+            }
+        }
+        dispatch(listPoems(list));
     } catch (e) {
         console.error(e);
     }

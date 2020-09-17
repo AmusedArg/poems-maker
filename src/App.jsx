@@ -45,10 +45,6 @@ function App() {
               <NavLink to="/random" className="nav-link" activeClassName="active">Aleatorio</NavLink>
             </li>
           </ul>
-          {/* <form className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="text" placeholder="Ej: Elvira" />
-            <button className="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-          </form> */}
         </div>
       </nav>
       <Switch>

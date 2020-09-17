@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { Fragment } from 'react'
+import AuthorsList from '../components/AuthorsList'
 
 const Footer = () => {
     return ( 
@@ -23,12 +24,9 @@ const Footer = () => {
 
                         <div className="col-xs-6 col-md-3">
                             <h6>Autores de los poemas</h6>
-                            <ul className="footer-links">
-                                <li><span>Elvira Sastre</span></li>
-                                <li><span>Magalí Tajes</span></li>
-                                <li><span>Mario Benedetti</span></li>
-                                <li><span>Lorena Pronsky</span></li>
-                            </ul>
+                            <div className="footer-links">
+                                <AuthorsList />
+                            </div>
                         </div>
                     </div>
                     <hr/>

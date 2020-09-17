@@ -1,17 +1,18 @@
-import './App.scss';
 import React, { Fragment } from 'react';
-import generateStore from './redux/store';
 import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink
+
+
+  NavLink, Route, Switch
 } from "react-router-dom";
-import Home from './pages/Home';
+import './App.scss';
 import Poems from './components/Poems';
+import Home from './pages/Home';
+import PoemAuthorPage from './pages/PoemAuthorPage';
 import PoemPage from './pages/PoemPage';
 import RandomPoemPage from './pages/RandomPoemPage';
+import generateStore from './redux/store';
 
 const AppWrapper = () => {
   const store = generateStore();
@@ -45,10 +46,6 @@ function App() {
               <NavLink to="/random" className="nav-link" activeClassName="active">Aleatorio</NavLink>
             </li>
           </ul>
-          {/* <form className="form-inline my-2 my-lg-0">
-            <input className="form-control mr-sm-2" type="text" placeholder="Ej: Elvira" />
-            <button className="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-          </form> */}
         </div>
       </nav>
       <Switch>
@@ -60,8 +57,11 @@ function App() {
             <Poems showFull={true} />
           </div>
         </Route>
-        <Route path="/poems/:id">
+        <Route exact path="/poems/:id">
           <PoemPage />
+        </Route>
+        <Route exact path="/poems/author/:name">
+          <PoemAuthorPage />
         </Route>
         <Route path="/random">
           <RandomPoemPage />

@@ -1,5 +1,6 @@
-@import './custom.scss';
-@import './footer.scss';
+@import './styles/custom.scss';
+@import './styles/footer.scss';
+@import './styles/algolia.scss';
 
 html,
 body {
@@ -80,6 +81,21 @@ body {
 
 .poem-card::first-letter {
   text-transform: capitalize;
+}
+
+.go-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  button {
+    background-color: transparent;
+    border: none;
+    font-size: 3.5rem;
+    color: $secondary;
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 @keyframes App-logo-spin {

@@ -1,8 +1,8 @@
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-
-import poemsReducer from './poemsDucks';
 import poemReducer from './poemDucks';
+import poemsReducer from './poemsDucks';
+
 
 const rootReducer = combineReducers({
     poems: poemsReducer,

@@ -66,7 +66,7 @@ body {
   font-family: 'Dancing Script', cursive;
 }
 
-.poem-card {
+.poem-card, .author-card {
   .card-text{
     font-style: italic;
   }
@@ -81,6 +81,15 @@ body {
 
 .poem-card::first-letter {
   text-transform: capitalize;
+}
+
+.author-card {
+  .author-pic {
+    border-radius: 100%;
+    height: 96px;
+    width: 96px;
+    object-fit: cover;
+  }
 }
 
 .go-top-btn {

@@ -13,6 +13,7 @@ import PoemAuthorPage from './pages/PoemAuthorPage';
 import PoemPage from './pages/PoemPage';
 import RandomPoemPage from './pages/RandomPoemPage';
 import generateStore from './redux/store';
+import AuthorsPage from './pages/AuthorsPage';
 
 const AppWrapper = () => {
   const store = generateStore();
@@ -43,6 +44,9 @@ function App() {
               <NavLink to="/poems" className="nav-link" activeClassName="active">Poemas</NavLink>
             </li>
             <li className="nav-item">
+              <NavLink to="/authors" className="nav-link" activeClassName="active">Autores</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink to="/random" className="nav-link" activeClassName="active">Aleatorio</NavLink>
             </li>
           </ul>
@@ -62,6 +66,11 @@ function App() {
         </Route>
         <Route exact path="/poems/author/:name">
           <PoemAuthorPage />
+        </Route>
+        <Route path="/authors">
+          <div className="container poems-container">
+            <AuthorsPage />
+          </div>
         </Route>
         <Route path="/random">
           <RandomPoemPage />

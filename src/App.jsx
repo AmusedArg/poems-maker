@@ -13,6 +13,7 @@ import PoemAuthorPage from './pages/PoemAuthorPage';
 import PoemPage from './pages/PoemPage';
 import RandomPoemPage from './pages/RandomPoemPage';
 import generateStore from './redux/store';
+import PageNotFound from './pages/PageNotFound';
 
 const AppWrapper = () => {
   const store = generateStore();
@@ -52,6 +53,7 @@ function App() {
         <Route path="/random">
           <RandomPoemPage />
         </Route>
+        <Route component={PageNotFound} />
       </Switch>      
       </Router>
     </Fragment>

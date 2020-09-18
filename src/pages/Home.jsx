@@ -7,33 +7,33 @@ import Footer from './Footer';
 
 const Home = () => {
 
-    const dispatch = useDispatch();
-  
-    React.useEffect(() => {
-        const obtenerPoemOfTheDay = () => {
-            dispatch(getPoemOfTheDayAction())
-        }
-        obtenerPoemOfTheDay()
-    }, [dispatch]);
+  const dispatch = useDispatch();
 
-    let poemOfTheDay = useSelector(store => store.poem.poemOfTheDay );
-    
-    if (poemOfTheDay) {
-        poemOfTheDay.text = poemOfTheDay.text.replace(/\n/g, "<br />");
+  React.useEffect(() => {
+    const obtenerPoemOfTheDay = () => {
+      dispatch(getPoemOfTheDayAction())
     }
-    return ( 
-        <Fragment>
-            <div className="container-fluid poem-day-container d-flex h-100 mb-5">
-                <span className="title d-none d-md-block">Poema del día</span>
-                <PoemOfDay poem={poemOfTheDay}></PoemOfDay>
-                <a href="#poems-cards" className="jam jam-chevron-down d-none d-lg-block">&nbsp;</a>
-            </div>
-            <div className="container poems-cards-container">
-                <Poems showFull={false}></Poems>
-            </div>
-            <Footer></Footer>
-        </Fragment>
-     );
+    obtenerPoemOfTheDay()
+  }, [dispatch]);
+
+  let poemOfTheDay = useSelector(store => store.poem.poemOfTheDay);
+
+  if (poemOfTheDay) {
+    poemOfTheDay.text = poemOfTheDay.text.replace(/\n/g, "<br />");
+  }
+  return (
+    <Fragment>
+      <div className="container-fluid poem-day-container d-flex h-100 mb-5">
+        <span className="title d-none d-md-block">Poema del día</span>
+        <PoemOfDay poem={poemOfTheDay}></PoemOfDay>
+        <a href="#poems-cards" className="jam jam-chevron-down d-none d-lg-block">&nbsp;</a>
+      </div>
+      <div className="container poems-cards-container">
+        <Poems showFull={false}></Poems>
+      </div>
+      <Footer></Footer>
+    </Fragment>
+  );
 }
- 
+
 export default Home;

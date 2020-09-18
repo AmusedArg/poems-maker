@@ -1,5 +1,7 @@
-@import './custom.scss';
-@import './footer.scss';
+@import './styles/variables.scss';
+@import './styles/footer.scss';
+@import './styles/algolia.scss';
+@import '~bootstrap/scss/bootstrap.scss';
 
 html,
 body {
@@ -19,6 +21,7 @@ body {
   color: #61dafb;
 }
 
+/** Home Page **/
 .poem-day-container {
   background-color: #282c34;
   color: $white;
@@ -50,6 +53,19 @@ body {
   }
 }
 
+/** Poem card styles **/
+.poem-card {
+  .poem-paragraph::first-letter {
+    text-transform: capitalize;
+  }
+  a.author-link {
+    color: black;
+    &:hover {
+      color: $secondary;
+    }
+  }
+}
+
 .poem-title {
   font-family: 'Amatic SC', cursive;
   font-size: 1.8rem;
@@ -63,9 +79,15 @@ body {
   font-style: normal;
   font-size: 1.5rem;
   font-family: 'Dancing Script', cursive;
+  a {
+    color: $secondary;
+    &:hover {
+      font-weight: bold;
+    }
+  }
 }
 
-.poem-card {
+.poem-card, .author-card {
   .card-text{
     font-style: italic;
   }
@@ -78,16 +100,48 @@ body {
   }
 }
 
-.poem-card::first-letter {
-  text-transform: capitalize;
+/** Author cards styles **/
+.author-card {
+  .poem-author {
+    font-size: 2rem;
+  }
+  .author-pic {
+    border-radius: 100%;
+    height: 96px;
+    width: 96px;
+    object-fit: cover;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.go-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  button {
+    background-color: transparent;
+    border: none;
+    font-size: 3.5rem;
+    color: $secondary;
+    &:focus {
+      outline: none;
+    }
   }
-  to {
-    transform: rotate(360deg);
+}
+
+/** 404 Page **/
+.page-not-found-container {
+  background-color: rgb(255, 228, 234);
+  img {
+    max-width: 30vw;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .page-not-found-container {
+    background-color: rgb(255, 228, 234);
+    img {
+      max-width: 90vw;
+    }
   }
 }
 

@@ -1,11 +1,18 @@
-import React from 'react'
-
+import algoliasearch from 'algoliasearch/lite';
+import React, { Fragment } from 'react';
+import { connectHits, InstantSearch, PoweredBy } from 'react-instantsearch-dom';
 // hooks react redux
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getPoemsAction } from '../redux/poemsDucks';
+import DebouncedSearchBox from './DebouncedSearchBox';
 import Poem from './Poem';
+import PoemHits from './PoemHits';
+import GoTopButton from './GoTopButton';
+
 
 const Poems = ({showFull}) => {
+    const searchClient = algoliasearch('BSJX5TTZV0', 'cefb7f2f5e85c4db06adbb1e58bf2e0b');
+
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -16,31 +23,28 @@ const Poems = ({showFull}) => {
     }, [dispatch]);
 
     const poems = useSelector(store => store.poems.list);
+    const CustomHits = connectHits(PoemHits);
 
     return (
-        <div id="poems-cards" className="card-columns mt-3">
-            {
-                poems.map(poem => {
-                    const pos = Math.floor(Math.random() * poem.paragraphs.length-1) + 1;
-                    poem = {
-                            id: poem.id,
-                            author: poem.author,
-                            website: poem.website,
-                            twitter: poem.twitter,
-                            instagram: poem.instagram,
-                            title: poem.title,
-                            paragraphs: poem.paragraphs,
-                            randomParagraph: poem.paragraphs[pos].text,
-                            fullText: poem.paragraphs.map((elem) => {
-                                return elem.text;
-                            }).join("<br><br>")
+        <Fragment>
+            {   showFull ? 
+                <Fragment>
+                    <InstantSearch searchClient={searchClient} indexName="dev_POEMS">
+                        <DebouncedSearchBox delay={500} />
+                        <PoweredBy />
+                        <CustomHits/>
+                    </InstantSearch>
+                    <GoTopButton />
+                </Fragment>
+                : <div id="poems-cards" className="card-columns mt-3">
+                    {
+                        poems.map(poem =>
+                            <Poem poem={poem} key={poem.id} showFull={showFull}></Poem>
+                        )
                     }
-                    return (
-                        <Poem poem={poem} key={poem.id} showFull={showFull}></Poem>
-                    )
-                })
+                </div>
             }
-        </div>
+        </Fragment>
     )
 }
 

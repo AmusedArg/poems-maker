@@ -30,12 +30,7 @@ const Poems = ({showFull}) => {
             {   showFull ? 
                 <Fragment>
                     <InstantSearch searchClient={searchClient} indexName="dev_POEMS">
-                        <DebouncedSearchBox delay={1000} />
-                        {/* <SearchBox translations={{
-                            submitTitle: 'Buscar',
-                            resetTitle: 'Cancelar',
-                            placeholder: 'Buscar autores, poemas, títulos...',
-                        }}/> */}
+                        <DebouncedSearchBox delay={500} />
                         <PoweredBy />
                         <CustomHits/>
                     </InstantSearch>

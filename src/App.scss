@@ -1,6 +1,7 @@
-@import './styles/custom.scss';
+@import './styles/variables.scss';
 @import './styles/footer.scss';
 @import './styles/algolia.scss';
+@import '~bootstrap/scss/bootstrap.scss';
 
 html,
 body {
@@ -20,6 +21,7 @@ body {
   color: #61dafb;
 }
 
+/** Home Page **/
 .poem-day-container {
   background-color: #282c34;
   color: $white;
@@ -48,6 +50,19 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 4rem;
+  }
+}
+
+/** Poem card styles **/
+.poem-card {
+  .poem-paragraph::first-letter {
+    text-transform: capitalize;
+  }
+  a.author-link {
+    color: black;
+    &:hover {
+      color: $secondary;
+    }
   }
 }
 
@@ -85,10 +100,7 @@ body {
   }
 }
 
-.poem-card::first-letter {
-  text-transform: capitalize;
-}
-
+/** Author cards styles **/
 .author-card {
   .poem-author {
     font-size: 2rem;

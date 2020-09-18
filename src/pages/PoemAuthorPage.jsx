@@ -8,34 +8,34 @@ import Author from '../components/Author';
 
 const PoemAuthorPage = () => {
 
-    let { name } = useParams();
+  let { name } = useParams();
 
-    const dispatch = useDispatch();
-  
-    React.useEffect(() => {
-        const obtenerPoem = () => {
-            dispatch(getPoemsByAuthorAction(name))
-        }
-        obtenerPoem()
-    }, [dispatch, name]);
+  const dispatch = useDispatch();
 
-    const poems = useSelector(store => store.poems.list );
+  React.useEffect(() => {
+    const obtenerPoem = () => {
+      dispatch(getPoemsByAuthorAction(name))
+    }
+    obtenerPoem()
+  }, [dispatch, name]);
 
-    return ( 
-        <Fragment>
-            <div className="container authors-cards-container">
-                <Author name={name  }/>
-                <div id="authors-cards" className="card-columns mt-3">
-                    {
-                        poems.map(poem =>
-                            <Poem poem={poem} key={poem.id} showFull={true}></Poem>
-                        )
-                    }
-                </div>
-            </div>
-            <GoTopButton />
-        </Fragment>
-     );
+  const poems = useSelector(store => store.poems.list);
+
+  return (
+    <Fragment>
+      <div className="container authors-cards-container">
+        <Author name={name} />
+        <div id="authors-cards" className="card-columns mt-3">
+          {
+            poems.map(poem =>
+              <Poem poem={poem} key={poem.id} showFull={true}></Poem>
+            )
+          }
+        </div>
+      </div>
+      <GoTopButton />
+    </Fragment>
+  );
 }
- 
+
 export default PoemAuthorPage;

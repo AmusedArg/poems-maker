@@ -32,7 +32,7 @@ export function listPoems(list) {
 export const getPoemsAction = () => async (dispatch, getState) => {
     try {
         let poems = getCachedPoems();
-        if (poems.length === 0) {
+        if (poems && poems.length === 0) {
             const res = await axios.get(`https://poemasmaker.firebaseio.com/poems.json`);
             poems = buildPoemsList(res.data);
             window.localStorage.setItem('poems', JSON.stringify(poems));
@@ -50,7 +50,6 @@ export const getPoemsAction = () => async (dispatch, getState) => {
 export const getPoemsByAuthorAction = (name) => async (dispatch, getState) => {
     try {
         const res = await axios.get(`https://poemasmaker.firebaseio.com/poems.json?orderBy="author"&equalTo="${name}"`);
-        console.log(res.data);
         dispatch(listPoems(buildPoemsList(res.data)));
     } catch (e) {
         console.error(e);

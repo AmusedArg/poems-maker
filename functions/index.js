@@ -137,27 +137,26 @@ exports.randomTweet = functions.pubsub.schedule('every 1 hours').onRun((context)
     return null;
 });
 
-exports.createIndex = functions.database.ref('/poems/{pushID}').onCreate((snap, context) => {
-    if (context.authType === 'ADMIN') {
-        const item = snap.val();
-        collectionIndex.saveObject({
-            objectID: snap.key,
-            author: item.author,
-            title: item.title
-        }, {autoGenerateObjectIDIfNotExist: true})
-        .then(() => {
-            console.log('Firebase object indexed in Algolia', record.objectID);
-            return null;
-        })
-        .catch(error => {
-            console.error('Error when indexing poem into Algolia', error);
-            return null;
-        });
+exports.createIndex = functions.database.ref('/poems/{pushID}').onCreate((snap) => {
+    const item = snap.val();
+    collectionIndex.saveObject({
+        objectID: snap.key,
+        author: item.author,
+        title: item.title,
+        instagram: item.instagram,
+        twitter: item.twitter,
+        website: item.website,
+        content: item.paragraphs
+    }, {autoGenerateObjectIDIfNotExist: true})
+    .then(() => {
+        console.log('Firebase object indexed in Algolia', record.objectID);
         return null;
-    } else {
-        console.error('Permission denied');
+    })
+    .catch(error => {
+        console.error('Error when indexing poem into Algolia', error);
         return null;
-    }
+    });
+    return null;
 });
 
 exports.updateIndex = functions.database.ref('/poems/{pushId}').onUpdate((change, context) => {

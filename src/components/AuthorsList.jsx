@@ -3,6 +3,7 @@ import { getCachedPoems } from '../redux/poemsDucks';
 
 const AuthorsList = () => {
     let poems = getCachedPoems();
+    if (!poems) { return null; }
     // Removes duplicated authors
     poems = poems.filter((p, index, self) =>
         index === self.findIndex((t) => (

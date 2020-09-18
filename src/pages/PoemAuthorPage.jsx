@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Poem from '../components/Poem';
 import { getPoemsByAuthorAction } from '../redux/poemsDucks';
 import GoTopButton from '../components/GoTopButton';
+import Author from '../components/Author';
 
 const PoemAuthorPage = () => {
 
@@ -22,8 +23,9 @@ const PoemAuthorPage = () => {
 
     return ( 
         <Fragment>
-            <div className="container poems-cards-container">
-                <div id="poems-cards" className="card-columns mt-3">
+            <div className="container authors-cards-container">
+                <Author name={name  }/>
+                <div id="authors-cards" className="card-columns mt-3">
                     {
                         poems.map(poem =>
                             <Poem poem={poem} key={poem.id} showFull={true}></Poem>

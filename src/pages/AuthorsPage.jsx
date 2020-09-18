@@ -5,6 +5,7 @@ import { getCachedPoems } from '../redux/poemsDucks';
 
 const AuthorsPage = () => {
     let poems = getCachedPoems();
+    if (!poems) { return null; }
     let filteredPoems = [];
     
     // Removes duplicated authors
@@ -20,7 +21,7 @@ const AuthorsPage = () => {
                 <div id="poems-cards" className="my-3">
                     {
                         filteredPoems.map(p =>
-                            <Author poem={p} key={p.author}/>
+                            <Author poem={p} name={p.author} key={p.author}/>
                         )
                     }
                 </div>

@@ -15,6 +15,8 @@ const AuthorsPage = () => {
     ))
   );
 
+  filteredPoems.sort((a, b) => a.author > b.author ? 1 : -1)
+
   return (
     <Fragment>
       {

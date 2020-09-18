@@ -11,6 +11,8 @@ const AuthorsList = () => {
     ))
   );
 
+  poems.sort((a, b) => a.author > b.author ? 1 : -1)
+
   return (
     <Fragment>
       <div className="authors-list">

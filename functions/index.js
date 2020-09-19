@@ -52,16 +52,19 @@ const getRandomPoem = (data) => {
     return elem.text;
   }).join("<br><br>");
 
-  return {
+  let poem = {
     text: randomText.text,
     fullText: fullText,
     paragraphs: randomPoem.paragraphs,
     author: randomPoem.author,
-    website: randomPoem.website,
-    twitter: randomPoem.twitter,
-    instagram: randomPoem.instagram,
     title: randomPoem.title
   };
+
+  if (randomPoem.website) { poem['website']  = randomPoem.website; }
+  if (randomPoem.twitter) { poem['twitter']  = randomPoem.twitter; }
+  if (randomPoem.instagram) { poem['instagram']  = randomPoem.instagram; }
+
+  return poem;
 }
 
 exports.random = functions.runWith({
@@ -92,7 +95,7 @@ exports.random = functions.runWith({
 exports.poemOftheDayGenerator = functions.runWith({
   timeoutSeconds: 30,
   memory: '128MB'
-}).pubsub.schedule('every day 00:00').onRun((context) => {
+}).pubsub.schedule('every day 00:00').timeZone('America/Buenos_Aires').onRun((context) => {
   const ref = admin.database().ref('poemOfTheDay');
   ref.once("value", (snapshot) => {
     const poemsRef = admin.database().ref('poems');
@@ -110,7 +113,7 @@ exports.poemOftheDayGenerator = functions.runWith({
   return null;
 });
 
-exports.randomTweet = functions.pubsub.schedule('every 1 hours').onRun((context) => {
+exports.randomTweet = functions.pubsub.schedule('every 3 hours').onRun((context) => {
   Twit = require('twit'),
     config = {
       twitter: {

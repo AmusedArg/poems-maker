@@ -14,17 +14,22 @@ const Author = ({ poem, name }) => {
       setSummary(res.data[name]?.summary);
     }
     getInfo();
-  });
+  }, [name]);
 
   return (
     <div className="card shadow-sm author-card mx-auto mt-3">
       <div className="card-body">
         <div className="media">
           {
-            picture && <img src={picture} alt={name} className="align-self-center mb-3 author-pic" />
+            picture && <img src={picture} alt={name} className="align-self-center mb-3 author-pic d-none d-lg-block" />
           }
           <div className="media-body ml-3">
-            <h5 className="mt-0 poem-author"><a href={`/poems/author/${name}`}>{name}</a></h5>
+            <h5 className="mt-0 poem-author">
+            {
+              picture && <img src={picture} alt={name} className="small-author-pic d-md-none" />
+            }
+            <a href={`/poems/author/${name}`}>{name}</a>
+            </h5>
             <p>{summary}</p>
           </div>
         </div>

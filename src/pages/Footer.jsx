@@ -36,7 +36,7 @@ const Footer = () => {
           <div className="row">
             <div className="col-md-8 col-sm-6 col-xs-12">
               <p className="copyright-text">Copyright &copy; 2020 All Rights Reserved by
-                <a href="/"> Poems Maker</a>.
+                <a href="/"> Poemas Maker</a>.
               </p>
               <br />
               <p>

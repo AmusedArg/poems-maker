@@ -51,6 +51,28 @@ body {
     margin-right: auto;
     width: 4rem;
   }
+  #floral-design-top-right {
+    position: absolute;
+    right: 0px;
+    display: block;
+    transform: rotate(90deg);
+  }
+  #floral-design-bottom-left {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+  }
+}
+
+.link-follow-twitter span.jam{
+  font-size: 2rem;
+  line-height: 1rem;
+  vertical-align: sub;
+}
+
+.link-follow-twitter:hover {
+  color: rgb(29, 161, 242) !important;
 }
 
 /** Poem card styles **/

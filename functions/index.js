@@ -113,7 +113,7 @@ exports.poemOftheDayGenerator = functions.runWith({
   return null;
 });
 
-exports.randomTweet = functions.pubsub.schedule('every 1 hours').onRun((context) => {
+exports.randomTweet = functions.pubsub.schedule('every 3 hours').onRun((context) => {
   Twit = require('twit'),
     config = {
       twitter: {

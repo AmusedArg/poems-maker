@@ -23,7 +23,7 @@ const Home = () => {
   }
   return (
     <Fragment>
-      <div className="container-fluid poem-day-container d-flex h-100 mb-5">
+      <div className="container-fluid poem-day-container d-flex mb-5 position-relative">
         <img src="/floral-design.svg" alt="" className="floral-design d-none d-lg-block" id="floral-design-top-right"/>
         <img src="/floral-design-2.svg" alt="" className="floral-design d-none d-lg-block" id="floral-design-bottom-left"/>
         <span className="title d-none d-md-block">Poema del día</span>

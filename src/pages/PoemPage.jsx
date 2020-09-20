@@ -17,7 +17,7 @@ const PoemPage = () => {
     obtenerPoem()
   }, [dispatch, id]);
 
-  const poem = useSelector(store => store.poem.poem);
+  const poem = useSelector(state => state.poem.poem);
 
   return (
     <Fragment>

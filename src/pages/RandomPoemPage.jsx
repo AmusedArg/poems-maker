@@ -14,7 +14,7 @@ const RandomPoemPage = () => {
     obtenerPoem()
   }, [dispatch]);
 
-  const poem = useSelector(store => store.poem.poem);
+  const poem = useSelector(state => state.poem.poem);
 
   return (
     <Fragment>

@@ -11,7 +11,7 @@ const AuthorsList = () => {
     obtenerPoem()
   }, [dispatch]);
 
-  let authors = useSelector(store => store.authors.list);
+  let authors = useSelector(state => state.authors.list);
 
   return (
     <Fragment>

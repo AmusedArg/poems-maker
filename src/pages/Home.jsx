@@ -15,7 +15,7 @@ const Home = () => {
     obtenerPoemOfTheDay()
   }, [dispatch]);
 
-  let poemOfTheDay = useSelector(store => store.poem.poemOfTheDay);
+  let poemOfTheDay = useSelector(state => state.poem.poemOfTheDay);
 
   if (poemOfTheDay) {
     poemOfTheDay.text = poemOfTheDay.text.replace(/\n/g, "<br />");

@@ -24,7 +24,10 @@ const Header = () => {
               <a href="/random" className="nav-link" >Aleatorio</a>
             </li>
             <li className="nav-item">
-              <a href="https://twitter.com/PoemasMaker" className="nav-link link-follow-twitter" target="_blank" rel="noopener noreferrer"><span className="jam jam-twitter"></span><span className="d-md-none">@PoemasMaker</span></a>
+              <a href="https://twitter.com/PoemasMaker" className="nav-link link-follow-twitter" target="_blank" rel="noopener noreferrer">
+                <span className="jam jam-twitter"></span>
+                <span className="tw-username">@PoemasMaker</span>
+              </a>
             </li>
           </ul>
         </div>

@@ -6,6 +6,7 @@
 html,
 body {
   height: 100%;
+  background-color: $secondary-light;
   margin: 0;
   scroll-behavior: smooth;
   a {
@@ -65,14 +66,25 @@ body {
   }
 }
 
-.link-follow-twitter span.jam{
-  font-size: 2rem;
-  line-height: 1rem;
-  vertical-align: sub;
-}
-
-.link-follow-twitter:hover {
-  color: rgb(29, 161, 242) !important;
+.link-follow-twitter {
+  span.jam {
+    font-size: 2rem;
+    line-height: 1rem;
+    vertical-align: sub;
+  }
+  span.tw-username {
+    width: 0px;
+    max-width: max-content;
+    display: inline-flex;
+    overflow: hidden;
+  }
+  &:hover {
+    color: rgb(29, 161, 242) !important;
+    span.tw-username {
+      width: 10vw !important;
+      transition: .5s width;
+    }
+  }
 }
 
 /** Poem card styles **/

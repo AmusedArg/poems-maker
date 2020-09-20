@@ -11,7 +11,7 @@ const Poem = ({ poem, showFull }) => {
   };
   ScrollReveal().reveal('.card', slideUp);
 
-  let text;
+  let text = '';
   if (showFull) {
     text = poem.fullText;
   } else {
@@ -30,19 +30,19 @@ const Poem = ({ poem, showFull }) => {
         <div className="card-text">
           {showFull
             ? poem.paragraphs?.map((elem, i) => {
+              // Para casos donde se obtienen desde Algolia y no desde firebase
+              elem.text = elem.text.replace(/\n/g, "<br />");
               return (
                 <Fragment key={i}>
-                  <div className="poem-paragraph">
-                    {elem.text}
-                  </div>
+                  <div className="poem-paragraph" dangerouslySetInnerHTML={{ __html: elem.text }}></div>
                   <br />
                 </Fragment>
               )
             })
             : <Fragment>
-              <div className="poem-paragraph">
-                {text}<br /><br />
+              <div className="poem-paragraph" dangerouslySetInnerHTML={{ __html: text }}>
               </div>
+              <br/>
             </Fragment>
           }
         </div>

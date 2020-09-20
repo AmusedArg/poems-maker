@@ -9,43 +9,40 @@ import Poem from './Poem';
 import PoemHits from './PoemHits';
 import GoTopButton from './GoTopButton';
 
+const Poems = ({ showFull }) => {
+  const searchClient = algoliasearch('BSJX5TTZV0', '7260de0401420c3cabf53f01a55e5f75');
+  const poems = useSelector(store => store.poems.list);
+  const dispatch = useDispatch();
+  const CustomHits = connectHits(PoemHits);
 
-const Poems = ({showFull}) => {
-    const searchClient = algoliasearch('BSJX5TTZV0', 'cefb7f2f5e85c4db06adbb1e58bf2e0b');
+  React.useEffect(() => {
+    const obtenerListado = () => {
+      dispatch(getPoemsAction())
+    }
+    obtenerListado()
+  }, [dispatch]);
 
-    const dispatch = useDispatch();
-
-    React.useEffect(() => {
-        const obtenerListado = () => {
-            dispatch(getPoemsAction())
-        }
-        obtenerListado()
-    }, [dispatch]);
-
-    const poems = useSelector(store => store.poems.list);
-    const CustomHits = connectHits(PoemHits);
-
-    return (
+  return (
+    <Fragment>
+      {showFull ?
         <Fragment>
-            {   showFull ? 
-                <Fragment>
-                    <InstantSearch searchClient={searchClient} indexName="dev_POEMS">
-                        <DebouncedSearchBox delay={500} />
-                        <PoweredBy />
-                        <CustomHits/>
-                    </InstantSearch>
-                    <GoTopButton />
-                </Fragment>
-                : <div id="poems-cards" className="card-columns mt-3">
-                    {
-                        poems.map(poem =>
-                            <Poem poem={poem} key={poem.id} showFull={showFull}></Poem>
-                        )
-                    }
-                </div>
-            }
+          <InstantSearch searchClient={searchClient} indexName="dev_POEMS">
+            <DebouncedSearchBox delay={1000} />
+            <PoweredBy />
+            <CustomHits />
+          </InstantSearch>
+          <GoTopButton />
         </Fragment>
-    )
+        : <div id="poems-cards" className="card-columns mt-3">
+          {
+            poems.map(poem =>
+              <Poem poem={poem} key={poem.id} showFull={showFull}></Poem>
+            )
+          }
+        </div>
+      }
+    </Fragment>
+  )
 }
 
 export default Poems

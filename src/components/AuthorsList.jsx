@@ -1,24 +1,25 @@
 import React, { Fragment } from 'react';
-import { getCachedPoems } from '../redux/poemsDucks';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuthorsAction } from '../redux/authorsDucks';
 
 const AuthorsList = () => {
-  let poems = getCachedPoems();
-  if (!poems) { return null; }
-  // Removes duplicated authors
-  poems = poems.filter((p, index, self) =>
-    index === self.findIndex((t) => (
-      t.author === p.author
-    ))
-  );
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    const obtenerPoem = () => {
+      dispatch(getAuthorsAction())
+    }
+    obtenerPoem()
+  }, [dispatch]);
 
-  poems.sort((a, b) => a.author > b.author ? 1 : -1)
+  let authors = useSelector(store => store.authors.list);
 
   return (
     <Fragment>
       <div className="authors-list">
         {
-          poems.map(p => {
-            return <li key={p.id}><a href={`/poems/author/${p.author}`}>{p.author}</a></li>;
+          authors.map((p, index) => {
+            const author = p[0];
+            return <li key={index}><a href={`/poems/author/${author}`}>{author}</a></li>;
           })
         }
       </div>

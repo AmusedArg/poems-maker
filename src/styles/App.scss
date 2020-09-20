@@ -1,6 +1,6 @@
-@import './styles/variables.scss';
-@import './styles/footer.scss';
-@import './styles/algolia.scss';
+@import './variables.scss';
+@import './footer.scss';
+@import './algolia.scss';
 @import '~bootstrap/scss/bootstrap.scss';
 
 html,
@@ -73,6 +73,19 @@ body {
 
 .link-follow-twitter:hover {
   color: rgb(29, 161, 242) !important;
+}
+
+/** Poem card styles **/
+.poem-card {
+  .poem-paragraph::first-letter {
+    text-transform: capitalize;
+  }
+  a.author-link {
+    color: black;
+    &:hover {
+      color: $secondary;
+    }
+  }
 }
 
 /** Poem card styles **/

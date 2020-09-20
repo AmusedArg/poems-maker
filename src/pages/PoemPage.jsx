@@ -21,7 +21,7 @@ const PoemPage = () => {
 
   return (
     <Fragment>
-      <div className="container mt-3 mb-3 col-md-8">
+      <div className="container mt-3 mb-3 col-md-4">
         <Poem poem={poem} showFull={true}></Poem>
       </div>
     </Fragment>

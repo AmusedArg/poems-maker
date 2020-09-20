@@ -77,6 +77,7 @@ export const getPoemAction = (id) => async (dispatch, getState) => {
       title: res.data.title,
       paragraphs: res.data.paragraphs,
       fullText: res.data.paragraphs.map(function (elem) {
+        elem.text = elem.text.replace(/\n/g, "<br />");
         return elem.text;
       }).join("<br><br>")
     }
@@ -99,6 +100,7 @@ export const getRandomPoemAction = () => async (dispatch, getState) => {
       title: res.data.title,
       paragraphs: res.data.paragraphs,
       fullText: res.data.paragraphs.map(function (elem) {
+        elem.text = elem.text.replace(/\n/g, "<br />");
         return elem.text;
       }).join("<br><br>")
     }

@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPoemOfTheDayAction } from '../redux/poemDucks';
-import Poems from '../components/Poems';
 import PoemOfDay from '../components/PoemOfDay';
-import Footer from './Footer';
+import Poems from '../components/Poems';
+import { getPoemOfTheDayAction } from '../redux/poemDucks';
 
 const Home = () => {
 
@@ -33,7 +32,6 @@ const Home = () => {
       <div className="container poems-cards-container">
         <Poems showFull={false}></Poems>
       </div>
-      <Footer></Footer>
     </Fragment>
   );
 }

@@ -1,20 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Author = ({ poem, name }) => {
+  const authors = useSelector(store => store.authors.list);
 
-  const [picture, setPicture] = useState(null);
-  const [summary, setSummary] = useState(null);
+  let authorInfo;
 
-  React.useEffect(() => {
-    async function getInfo() {
-      const res = await axios.get(`https://poemasmaker.firebaseio.com/authors.json?orderBy="$key"&equalTo="${name}"`);
-      setPicture(res.data[name]?.picture);
-      setSummary(res.data[name]?.summary);
+  for (const author of authors) {
+    if (author[0] === name) {
+      authorInfo = author[1];
+      break;
     }
-    getInfo();
-  }, [name]);
+  }
+
+  if (!authorInfo) { return null;}
+
+  const picture = authorInfo.picture;
+  const summary = authorInfo.summary;
 
   return (
     <div className="card shadow-sm author-card mx-auto mt-3">

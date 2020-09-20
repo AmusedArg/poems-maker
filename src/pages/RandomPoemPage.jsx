@@ -18,7 +18,7 @@ const RandomPoemPage = () => {
 
   return (
     <Fragment>
-      <div className="container mt-3 mb-3 col-md-8">
+      <div className="container mt-3 mb-3 col-md-8 col-lg-6">
         {!poem &&
           <div className="text-center">
             <div className="spinner-border text-warning" role="status">

@@ -21,7 +21,7 @@ const Header = () => {
               <NavLink to="/authors" className="nav-link" activeClassName="active">Autores</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/random" className="nav-link" activeClassName="active">Aleatorio</NavLink>
+              <a href="/random" className="nav-link" >Aleatorio</a>
             </li>
             <li className="nav-item">
               <a href="https://twitter.com/PoemasMaker" className="nav-link link-follow-twitter" target="_blank" rel="noopener noreferrer"><span className="jam jam-twitter"></span><span className="d-md-none">@PoemasMaker</span></a>

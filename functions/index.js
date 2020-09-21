@@ -114,7 +114,7 @@ exports.poemOftheDayGenerator = functions.runWith({
 });
 
 exports.randomTweet = functions.pubsub.schedule('every 3 hours').onRun((context) => {
-  Twit = require('twit'),
+  let Twit = require('twit'),
     config = {
       twitter: {
         consumer_key: process.env.CONSUMER_KEY,

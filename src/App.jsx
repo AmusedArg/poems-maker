@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import {
   BrowserRouter as Router,
   Route, Switch
@@ -15,6 +15,9 @@ import RandomPoemPage from './pages/RandomPoemPage';
 import generateStore from './redux/store';
 import PageNotFound from './pages/PageNotFound';
 import Footer from './pages/Footer';
+import SignUpPage from './pages/SignUpPage';
+import { authorizeUserAction } from './redux/authorizerDucks';
+import firebase from './Firebase';
 
 const AppWrapper = () => {
   const store = generateStore();
@@ -27,6 +30,10 @@ const AppWrapper = () => {
 }
 
 function App() {
+  const dispatch = useDispatch();
+  firebase.auth().onAuthStateChanged(
+    (user) => dispatch(authorizeUserAction(user))
+  );
   return (
     <Fragment>
       <Router>
@@ -53,6 +60,9 @@ function App() {
           </Route>
           <Route path="/random">
             <RandomPoemPage />
+          </Route>
+          <Route path="/signup">
+            <SignUpPage />
           </Route>
           <Route component={PageNotFound} />
         </Switch>      

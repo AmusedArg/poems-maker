@@ -10,8 +10,8 @@ import PoemHits from './PoemHits';
 import GoTopButton from './GoTopButton';
 
 const Poems = ({ showFull }) => {
-  const searchClient = algoliasearch('BSJX5TTZV0', '7260de0401420c3cabf53f01a55e5f75');
-  const poems = useSelector(store => store.poems.list);
+  const searchClient = algoliasearch('BSJX5TTZV0', 'cefb7f2f5e85c4db06adbb1e58bf2e0b');
+  const poems = useSelector(state => state.poems.list);
   const dispatch = useDispatch();
   const CustomHits = connectHits(PoemHits);
 

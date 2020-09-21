@@ -114,7 +114,7 @@ exports.poemOftheDayGenerator = functions.runWith({
 });
 
 exports.randomTweet = functions.pubsub.schedule('every 3 hours').onRun((context) => {
-  Twit = require('twit'),
+  let Twit = require('twit'),
     config = {
       twitter: {
         consumer_key: process.env.CONSUMER_KEY,
@@ -127,7 +127,9 @@ exports.randomTweet = functions.pubsub.schedule('every 3 hours').onRun((context)
 
   const root = admin.database().ref('poems');
   root.once("value", (snapshot) => {
-    const tw = getRandomPoem(snapshot).text;
+    const poem = getRandomPoem(snapshot);
+    let tw = poem.text;
+    tw = tw.concat('\n\n').concat(poem.author);
     T.post('statuses/update', { status: tw }, (err, data, response) => {
       if (err) {
         console.log('error!', err);

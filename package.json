@@ -9,18 +9,18 @@
     "algoliasearch": "^4.5.1",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
-    "firebase": "^7.19.1",
+    "firebase": "^7.21.0",
     "jquery": "^3.5.1",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-firebaseui": "^4.1.0",
     "react-instantsearch-dom": "^6.7.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
-    "redux-devtools": "^3.6.1",
     "redux-thunk": "^2.3.0",
     "scrollreveal": "^4.0.7"
   },
@@ -29,7 +29,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && firebase deploy"
+    "deploy": "react-scripts build && firebase deploy",
+    "deploy-hosting": "react-scripts build && firebase deploy --only hosting"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-devtools": "^3.7.0"
   }
 }

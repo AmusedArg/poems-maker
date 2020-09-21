@@ -1,7 +1,11 @@
 import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import UserDropdown from '../components/UserDropdow';
 
 const Header = () => {
+  const user = useSelector(state => state.user)
+
   return (
     <Fragment>
       <nav className="navbar navbar-expand-lg navbar-light bg-primary">
@@ -30,6 +34,15 @@ const Header = () => {
               </a>
             </li>
           </ul>
+          { !user.data?.emailVerified ?
+            <Fragment>
+              <a href="/register" className="btn btn-outline-secondary bg-white ml-2">Iniciar sesión</a>
+            </Fragment>
+            :
+            <Fragment>
+              <UserDropdown />
+            </Fragment>
+          }
         </div>
       </nav>
     </Fragment>

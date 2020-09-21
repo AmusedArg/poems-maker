@@ -11,7 +11,7 @@ import GoTopButton from './GoTopButton';
 
 const Poems = ({ showFull }) => {
   const searchClient = algoliasearch('BSJX5TTZV0', 'cefb7f2f5e85c4db06adbb1e58bf2e0b');
-  const poems = useSelector(store => store.poems.list);
+  const poems = useSelector(state => state.poems.list);
   const dispatch = useDispatch();
   const CustomHits = connectHits(PoemHits);
 

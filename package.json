@@ -9,7 +9,7 @@
     "algoliasearch": "^4.5.1",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
-    "firebase": "^7.19.1",
+    "firebase": "^7.21.0",
     "jquery": "^3.5.1",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
@@ -29,7 +29,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && firebase deploy"
+    "deploy": "react-scripts build && firebase deploy",
+    "deploy-hosting": "react-scripts build && firebase deploy --only hosting"
   },
   "eslintConfig": {
     "extends": "react-app"

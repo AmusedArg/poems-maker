@@ -19,7 +19,7 @@ const PoemAuthorPage = () => {
     obtenerPoem()
   }, [dispatch, name]);
 
-  const poems = useSelector(store => store.poems.list);
+  const poems = useSelector(state => state.poems.list);
 
   return (
     <Fragment>

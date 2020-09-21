@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Author = ({ poem, name }) => {
-  const authors = useSelector(store => store.authors.list);
+  const authors = useSelector(state => state.authors.list);
 
   let authorInfo;
 

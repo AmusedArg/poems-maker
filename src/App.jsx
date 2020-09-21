@@ -5,6 +5,7 @@ import {
   Redirect,
   Route, Switch
 } from "react-router-dom";
+import './styles/App.scss';
 import Poems from './components/Poems';
 import firebase from './Firebase';
 import AuthorsPage from './pages/AuthorsPage';
@@ -18,7 +19,6 @@ import RandomPoemPage from './pages/RandomPoemPage';
 import SignUpPage from './pages/SignUpPage';
 import { authorizeUserAction } from './redux/authorizerDucks';
 import generateStore from './redux/store';
-import './styles/App.scss';
 
 const AppWrapper = () => {
   const store = generateStore();

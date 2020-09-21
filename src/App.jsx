@@ -37,7 +37,7 @@ function App() {
     firebase.auth().onAuthStateChanged(
       (user) => dispatch(authorizeUserAction(user))
     );
-  }, [dispatch, user]);
+  }, [dispatch]);
   return (
     <Fragment>
       <Router>

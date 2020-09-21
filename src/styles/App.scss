@@ -6,6 +6,7 @@
 html,
 body {
   height: 100%;
+  background-color: $secondary-light;
   margin: 0;
   scroll-behavior: smooth;
   a {
@@ -19,6 +20,25 @@ body {
 
 .App-link {
   color: #61dafb;
+}
+
+.user-loggedin {
+  .btn {
+    color: white;
+  }
+  img {
+    border-radius: 100%;
+    height: 2em;
+  }
+}
+
+.login-page {
+  button {
+    border-radius: 0;
+  }
+  .login-error-msg {
+    color: red;
+  }
 }
 
 /** Home Page **/
@@ -65,14 +85,51 @@ body {
   }
 }
 
-.link-follow-twitter span.jam{
-  font-size: 2rem;
-  line-height: 1rem;
-  vertical-align: sub;
+.link-follow-twitter {
+  span.jam {
+    font-size: 2rem;
+    line-height: 1rem;
+    vertical-align: sub;
+  }
+  span.tw-username {
+    width: 0px;
+    max-width: max-content;
+    display: inline-flex;
+    overflow: hidden;
+  }
+  &:hover {
+    color: rgb(29, 161, 242) !important;
+    span.tw-username {
+      width: 10vw !important;
+      transition: .5s width;
+    }
+  }
 }
 
-.link-follow-twitter:hover {
-  color: rgb(29, 161, 242) !important;
+/** Poem card styles **/
+.poem-card {
+  .poem-paragraph::first-letter {
+    text-transform: capitalize;
+  }
+  a.author-link {
+    color: black;
+    &:hover {
+      color: $secondary;
+    }
+  }
+}
+
+/** Poem card styles **/
+.poem-card {
+  .poem-paragraph::first-letter {
+    text-transform: capitalize;
+  }
+  a.author-link {
+    color: black;
+    &:hover {
+      color: $secondary;
+    }
+  }
 }
 
 /** Poem card styles **/

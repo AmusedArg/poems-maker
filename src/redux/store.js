@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 import poemReducer from './poemDucks';
 import poemsReducer from './poemsDucks';
 import authorsReducer from './authorsDucks';
+import authorizerReducer from './authorizerDucks';
 
 
 const rootReducer = combineReducers({
   poems: poemsReducer,
   poem: poemReducer,
-  authors: authorsReducer
+  authors: authorsReducer,
+  user: authorizerReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

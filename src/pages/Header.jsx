@@ -1,13 +1,10 @@
 import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import firebase from '../Firebase';
+import UserDropdown from '../components/UserDropdow';
 
 const Header = () => {
   const user = useSelector(state => state.user)
-  const logout = () => {
-    firebase.auth().signOut();
-  }
 
   return (
     <Fragment>
@@ -37,14 +34,13 @@ const Header = () => {
               </a>
             </li>
           </ul>
-          { !user.data ?
+          { !user.data?.emailVerified ?
             <Fragment>
-              <a href="/signup" className="btn btn-outline-secondary bg-white ml-2">Iniciar sesión</a>
+              <a href="/register" className="btn btn-outline-secondary bg-white ml-2">Iniciar sesión</a>
             </Fragment>
             :
             <Fragment>
-              <span className="user-loggedin mr-2">{user.data.displayName}</span>
-              <button className="btn btn-outline-secondary bg-white" onClick={logout}>Salir</button>
+              <UserDropdown />
             </Fragment>
           }
         </div>

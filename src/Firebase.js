@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import 'firebase/analytics';
 
 // Configure Firebase.
 const config = {
@@ -12,5 +13,6 @@ const config = {
   measurementId: "G-14CXWLPN5S"
 };
 firebase.initializeApp(config);
+firebase.analytics();
 
 export default firebase;

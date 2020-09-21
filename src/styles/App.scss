@@ -23,7 +23,22 @@ body {
 }
 
 .user-loggedin {
-  
+  .btn {
+    color: white;
+  }
+  img {
+    border-radius: 100%;
+    height: 2em;
+  }
+}
+
+.login-page {
+  button {
+    border-radius: 0;
+  }
+  .login-error-msg {
+    color: red;
+  }
 }
 
 /** Home Page **/

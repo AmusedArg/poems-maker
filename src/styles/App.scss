@@ -145,6 +145,19 @@ body {
   }
 }
 
+/** Poem card styles **/
+.poem-card {
+  .poem-paragraph::first-letter {
+    text-transform: capitalize;
+  }
+  a.author-link {
+    color: black;
+    &:hover {
+      color: $secondary;
+    }
+  }
+}
+
 .poem-title {
   font-family: 'Amatic SC', cursive;
   font-size: 1.8rem;

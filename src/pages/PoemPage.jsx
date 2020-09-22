@@ -22,7 +22,15 @@ const PoemPage = () => {
   return (
     <Fragment>
       <div className="container mt-3 mb-3 col-md-4">
-        <Poem poem={poem} showFull={true}></Poem>
+        {!poem ?
+          <div className="text-center">
+            <div className="spinner-border text-warning" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+          :
+          <Poem poem={poem} showFull={true}></Poem>
+        }
       </div>
     </Fragment>
   );

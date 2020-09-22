@@ -1,12 +1,15 @@
 import 'firebase/auth';
 import React, { Fragment, useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import LoginError from '../components/LoginError';
 import firebase from '../Firebase';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [error, setError] = useState(null);
+  const [msg, setMsg] = useState(null);
+  const [requestPending, setRequestPending] = useState(false);
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -18,22 +21,29 @@ const SignUpPage = () => {
 
   const register = (e) => {
     e.preventDefault();
+    setRequestPending(true);
     firebase.auth().createUserWithEmailAndPassword(email, password).then(data => {
       if(data.user && data.user.emailVerified === false){
         data.user.sendEmailVerification().then(function(){
+          setMsg(`Verifica tu email ${email} para poder iniciar sesión`)
           setError(null);
-          console.log("email verification sent to user");
+          Array.from(document.querySelectorAll("input")).forEach(
+            input => (input.value = "")
+          );
         }).catch(e => {
-          console.log(e);
-        });
+          setError(e);
+          setMsg(null)
+        }).finally(()=> setRequestPending(false));
       }
     }).catch(function (error) {
-      setError(error.message);
-    });
+      setMsg(null)
+      setError(error.code);
+    }).finally(()=> setRequestPending(false));
   }
 
   const login = (e) => {
     e.preventDefault();
+    setRequestPending(true);
     firebase.auth().signInWithEmailAndPassword(email, password).then(data => {
       if(data.user && data.user.emailVerified === false){
         setError('El email no se encuentra verificado.');
@@ -41,8 +51,9 @@ const SignUpPage = () => {
         setError(null);
       }
     }).catch(function (error) {
-      setError(error.message);
-    });
+      console.log(error);
+      setError(error.code);
+    }).finally(()=> setRequestPending(false));
   }
 
   const uiConfig = {
@@ -60,6 +71,7 @@ const SignUpPage = () => {
   return (
     <Fragment>
       <div className="container login-page h-100 my-5">
+        <div className="text-center"><h3>Unirme a Poemas Maker</h3></div>
         <div>
           <div className="form-group col-lg-5 mt-5 mx-auto">
             <input type="email" required className="form-control form-control-lg" id="email" aria-describedby="emailHelp" placeholder="Email" onChange={updateEmail} autoComplete="off" autoFocus={true}/>
@@ -67,13 +79,28 @@ const SignUpPage = () => {
           <div className="form-group col-lg-5 mx-auto">
             <input type="password" required className="form-control form-control-lg" id="password" placeholder="Contraseña" onChange={updatePassword} />
           </div>
-          <div className="col-md-5 form-group mx-auto text-center">
-            <button className="btn btn-secondary btn-lg w-50" type="button" onClick={register}>Registrarse</button>
-            <button className="btn btn-primary btn-lg w-50" type="button" onClick={login}>Iniciar sesión</button>
+          <div className="form-group col-lg-5 mx-auto text-center">
+          { requestPending ?
+            <div className="progress mb-3">
+              <div className="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar"></div>
+            </div>
+            : <Fragment>
+                <button className="btn btn-secondary btn-lg col-lg-6 col-sm-12" type="button" onClick={register} disabled={!email || !password}>Registrarme</button>
+                <button className="btn btn-primary btn-lg col-lg-6 col-sm-12" type="button" onClick={login} disabled={!email || !password}>Iniciar sesión</button>
+              </Fragment>
+          }
           </div>
-          <div className="col-md-5 form-group mx-auto login-error-msg">
-            <small>{error}</small>
-          </div>
+          { error &&
+            <div className="col-md-5 form-group mx-auto login-error-msg">
+              <LoginError error={error} />
+            </div>
+          }
+          {
+            msg && 
+            <div className="col-md-5 form-group mx-auto login-error-msg">
+              <div className="alert alert-success">{msg}</div>
+            </div>
+          }
         </div>
         <div className="text-center">
           <span>O</span>

@@ -33,11 +33,17 @@ body {
 }
 
 .login-page {
+  h3 {
+    color: $secondary;
+  }
   button {
     border-radius: 0;
   }
   .login-error-msg {
     color: red;
+  }
+  .progress-bar {
+    width: 100%;
   }
 }
 
@@ -277,3 +283,8 @@ body {
   0% {opacity:0;}
   100% {opacity:1;}
   }
+
+/** Bootstrap override **/
+.btn-secondary{
+  color: white !important;
+}

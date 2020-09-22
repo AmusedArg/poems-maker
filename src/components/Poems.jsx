@@ -9,11 +9,11 @@ import Poem from './Poem';
 import PoemHits from './PoemHits';
 import GoTopButton from './GoTopButton';
 
+
 const Poems = ({ showFull }) => {
   const searchClient = algoliasearch('BSJX5TTZV0', 'cefb7f2f5e85c4db06adbb1e58bf2e0b');
-  const poems = useSelector(state => state.poems.list);
+
   const dispatch = useDispatch();
-  const CustomHits = connectHits(PoemHits);
 
   React.useEffect(() => {
     const obtenerListado = () => {
@@ -22,12 +22,15 @@ const Poems = ({ showFull }) => {
     obtenerListado()
   }, [dispatch]);
 
+  const poems = useSelector(store => store.poems.list);
+  const CustomHits = connectHits(PoemHits);
+
   return (
     <Fragment>
-      {showFull ?
+      {   showFull ?
         <Fragment>
           <InstantSearch searchClient={searchClient} indexName="dev_POEMS">
-            <DebouncedSearchBox delay={1000} />
+            <DebouncedSearchBox delay={500} />
             <PoweredBy />
             <CustomHits />
           </InstantSearch>

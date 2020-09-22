@@ -7,6 +7,7 @@ const SignUpPage = () => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [error, setError] = useState(null);
+  const [msg, setMsg] = useState(null);
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -21,13 +22,21 @@ const SignUpPage = () => {
     firebase.auth().createUserWithEmailAndPassword(email, password).then(data => {
       if(data.user && data.user.emailVerified === false){
         data.user.sendEmailVerification().then(function(){
+          setMsg('Se ha enviado un email para verificar la cuenta')
           setError(null);
+          setEmail(null);
+          setPassword(null);
           console.log("email verification sent to user");
         }).catch(e => {
+          setEmail(null);
+          setPassword(null);
+          setMsg(null)
           console.log(e);
         });
       }
     }).catch(function (error) {
+      console.log(error);
+      setMsg(null)
       setError(error.message);
     });
   }
@@ -74,6 +83,11 @@ const SignUpPage = () => {
           <div className="col-md-5 form-group mx-auto login-error-msg">
             <small>{error}</small>
           </div>
+          {
+            msg && <div className="col-md-5 form-group mx-auto login-error-msg">
+              <div className="alert alert-success">{msg}</div>
+            </div>
+          }
         </div>
         <div className="text-center">
           <span>O</span>

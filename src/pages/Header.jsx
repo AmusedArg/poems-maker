@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import UserDropdown from '../components/UserDropdow';
+import { firebaseAuth } from '../provider/AuthProvider';
 
 const Header = () => {
-  const user = useSelector(state => state.user)
+  const {isUserValid} = useContext(firebaseAuth);
 
   return (
     <Fragment>
@@ -34,7 +34,7 @@ const Header = () => {
               </a>
             </li>
           </ul>
-          { !user.data?.emailVerified ?
+          { !isUserValid() ?
             <Fragment>
               <a href="/register" className="btn btn-outline-secondary bg-white ml-2">Iniciar sesión</a>
             </Fragment>

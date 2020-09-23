@@ -1,13 +1,11 @@
-import React, { Fragment } from 'react';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import React, { Fragment, useContext } from 'react';
+import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
   Redirect,
   Route, Switch
 } from "react-router-dom";
-import './styles/App.scss';
-import Poems from './components/Poems';
-import firebase from './Firebase';
+import Poems from './components/poems/Poems';
 import AuthorsPage from './pages/AuthorsPage';
 import Footer from './pages/Footer';
 import Header from './pages/Header';
@@ -17,8 +15,9 @@ import PoemAuthorPage from './pages/PoemAuthorPage';
 import PoemPage from './pages/PoemPage';
 import RandomPoemPage from './pages/RandomPoemPage';
 import SignUpPage from './pages/SignUpPage';
-import { authorizeUserAction } from './redux/authorizerDucks';
+import { firebaseAuth } from './provider/AuthProvider';
 import generateStore from './redux/store';
+import './styles/App.scss';
 
 const AppWrapper = () => {
   const store = generateStore();
@@ -31,13 +30,8 @@ const AppWrapper = () => {
 }
 
 function App() {
-  const dispatch = useDispatch();
-  let user = useSelector(state => state.user);
-  React.useEffect(() => {
-    firebase.auth().onAuthStateChanged(
-      (user) => dispatch(authorizeUserAction(user))
-    );
-  }, [dispatch]);
+  const { isUserValid } = useContext(firebaseAuth)
+
   return (
     <Fragment>
       <Router>
@@ -66,7 +60,7 @@ function App() {
             <RandomPoemPage />
           </Route>
           <Route path="/register">
-            {user.data?.emailVerified ? <Redirect to="/" /> : <SignUpPage />}
+            {isUserValid() ? <Redirect to="/" /> : <SignUpPage />}
           </Route>
           <Route component={PageNotFound} />
         </Switch>      

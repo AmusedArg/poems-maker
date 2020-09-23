@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPoemAction } from '../redux/poemDucks';
 import { useParams } from 'react-router-dom';
-import Poem from '../components/Poem';
+import Poem from '../components/poems/Poem';
 
 const PoemPage = () => {
 

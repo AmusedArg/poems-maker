@@ -30,6 +30,12 @@ body {
     border-radius: 100%;
     height: 2em;
   }
+  .user-no-picture .jam {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    vertical-align: inherit;
+    margin-right: .2em;
+  }
 }
 
 .login-page {
@@ -171,6 +177,12 @@ body {
   color: #fff3b0;
   a:hover {
     color: #ffe764;
+  }
+  .fav-icon {
+    position: absolute;
+    right: 1em;
+    line-height: inherit;
+    cursor: pointer;
   }
 }
 .poem-author {

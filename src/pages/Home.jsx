@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import PoemOfDay from '../components/PoemOfDay';
-import Poems from '../components/Poems';
+import PoemOfDay from '../components/poems/PoemOfDay';
+import Poems from '../components/poems/Poems';
 import { getPoemOfTheDayAction } from '../redux/poemDucks';
 
 const Home = () => {

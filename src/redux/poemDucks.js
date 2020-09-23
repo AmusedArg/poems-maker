@@ -69,7 +69,7 @@ export const getPoemAction = (id) => async (dispatch, getState) => {
   try {
     const res = await axios.get(`https://poemasmaker.firebaseio.com/poems/${id}.json`);
     const poem = {
-      id: res.data.id,
+      id: id,
       author: res.data.author,
       website: res.data.website,
       twitter: res.data.twitter,

@@ -21,7 +21,7 @@ const PoemPage = () => {
 
   return (
     <Fragment>
-      <div className="container mt-3 mb-3 col-md-4">
+      <div className="container mt-3 mb-3 col-md-5">
         {!poem ?
           <div className="text-center">
             <div className="spinner-border text-warning" role="status">

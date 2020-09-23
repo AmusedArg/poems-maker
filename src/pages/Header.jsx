@@ -1,5 +1,6 @@
 import React, { Fragment, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import SecuredComponent from '../components/security/SecuredComponent';
 import UserDropdown from '../components/UserDropdow';
 import { firebaseAuth } from '../provider/AuthProvider';
 
@@ -40,7 +41,9 @@ const Header = () => {
             </Fragment>
             :
             <Fragment>
-              <UserDropdown />
+              <SecuredComponent>
+                <UserDropdown />
+              </SecuredComponent>
             </Fragment>
           }
         </div>

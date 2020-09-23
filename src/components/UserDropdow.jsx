@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { firebaseAuth } from '../provider/AuthProvider';
 
 const UserDropdown = () => {
-  const {user, isUserValid, handleLogout} = useContext(firebaseAuth);
+  const {user, handleLogout} = useContext(firebaseAuth);
   
   const logout = () => {
     handleLogout();
   }
   return (
-    isUserValid() && 
     <Fragment>
       <div className="dropdown">
         <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,8 +20,8 @@ const UserDropdown = () => {
           </span>
         </a>
 
-        <div className="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink">
-          {/* TODO: <button className="dropdown-item" onClick={verPerfil}>Ver Perfil</button> */}
+        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <NavLink to="/profile" className="dropdown-item">Ver Perfil</NavLink>
           <button className="dropdown-item" onClick={logout}>Salir</button>
         </div>
       </div>

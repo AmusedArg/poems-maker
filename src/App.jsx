@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import PageNotFound from './pages/PageNotFound';
 import PoemAuthorPage from './pages/PoemAuthorPage';
 import PoemPage from './pages/PoemPage';
+import ProfilePage from './pages/ProfilePage';
 import RandomPoemPage from './pages/RandomPoemPage';
 import SignUpPage from './pages/SignUpPage';
 import { firebaseAuth } from './provider/AuthProvider';
@@ -61,6 +62,9 @@ function App() {
           </Route>
           <Route path="/register">
             {isUserValid() ? <Redirect to="/" /> : <SignUpPage />}
+          </Route>
+          <Route path="/profile">
+            {isUserValid() && <ProfilePage />}
           </Route>
           <Route component={PageNotFound} />
         </Switch>      

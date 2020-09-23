@@ -195,6 +195,8 @@ exports.createUser = functions.auth.user().onCreate((user) => {
   admin.database().ref('users').child(user.uid).set({
       email: user.email,
       displayName: user.displayName,
+      photoURL: user.photoURL,
+      description: "",
       createdAt: user.metadata.creationTime,
       favorites: {}
   });

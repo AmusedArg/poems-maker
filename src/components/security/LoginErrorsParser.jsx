@@ -1,7 +1,6 @@
 import React from 'react'
 
-const LoginError = (data) => {
-  console.log(data.error);
+const LoginErrorsParser = (data) => {
   let msg = '';
   switch (data.error) {
     case 'auth/invalid-email':
@@ -11,13 +10,14 @@ const LoginError = (data) => {
       msg = 'La contraseña debe tener al menor 6 caracteres'
       break;
     case 'auth/user-not-found':
+    case 'auth/wrong-password':
       msg = 'Los datos ingresados son incorrectos'
       break;
     default:
       msg = 'Por favor reintenta nuevamente'
       break;
   }
-  console.log(msg);
+  
   return ( 
     <div className="form-group mx-auto login-error-msg">
       <div className="alert alert-secondary">{msg}</div>
@@ -25,4 +25,4 @@ const LoginError = (data) => {
   );
 }
  
-export default LoginError;
+export default LoginErrorsParser;

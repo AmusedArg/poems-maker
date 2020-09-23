@@ -1,59 +1,35 @@
-import 'firebase/auth';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import LoginError from '../components/LoginError';
-import firebase from '../Firebase';
+import LoginErrorsParser from '../components/security/LoginErrorsParser';
+import firebase from '../firebase/Firebase';
+import { firebaseAuth } from '../provider/AuthProvider';
 
 const SignUpPage = () => {
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [error, setError] = useState(null);
-  const [msg, setMsg] = useState(null);
   const [requestPending, setRequestPending] = useState(false);
+  const {handleRegister, handleLogin, setInputs, setError, setUser, error, inputs, user} = useContext(firebaseAuth);
 
   const updateEmail = (e) => {
-    setEmail(e.target.value);
+    const email = e.target.value;
+    setInputs(prev => ({...prev, email: email}))
   }
 
   const updatePassword = (e) => {
-    setPassword(e.target.value);
+    const password = e.target.value;
+    setInputs(prev => ({...prev, password: password}))
   }
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
     setRequestPending(true);
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(data => {
-      if(data.user && data.user.emailVerified === false){
-        data.user.sendEmailVerification().then(function(){
-          setMsg(`Verifica tu email ${email} para poder iniciar sesión`)
-          setError(null);
-          Array.from(document.querySelectorAll("input")).forEach(
-            input => (input.value = "")
-          );
-        }).catch(e => {
-          setError(e);
-          setMsg(null)
-        }).finally(()=> setRequestPending(false));
-      }
-    }).catch(function (error) {
-      setMsg(null)
-      setError(error.code);
-    }).finally(()=> setRequestPending(false));
+    await handleRegister(inputs.email, inputs.password, setError, setUser);
+    setRequestPending(false);
   }
 
-  const login = (e) => {
+  const login = async (e) => {
     e.preventDefault();
     setRequestPending(true);
-    firebase.auth().signInWithEmailAndPassword(email, password).then(data => {
-      if(data.user && data.user.emailVerified === false){
-        setError('El email no se encuentra verificado.');
-      } else {
-        setError(null);
-      }
-    }).catch(function (error) {
-      console.log(error);
-      setError(error.code);
-    }).finally(()=> setRequestPending(false));
+    await handleLogin(inputs.email, inputs.password, setError, setUser);
+    setRequestPending(false);
   }
 
   const uiConfig = {
@@ -62,7 +38,7 @@ const SignUpPage = () => {
     signInFlow: 'popup',
     signInOptions: [
       {
-        provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        provider: firebase.googleProviderId,
         fullLabel: 'Inicia sesión con Google'
       }
     ]
@@ -85,20 +61,20 @@ const SignUpPage = () => {
               <div className="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar"></div>
             </div>
             : <Fragment>
-                <button className="btn btn-secondary btn-lg col-lg-6 col-sm-12" type="button" onClick={register} disabled={!email || !password}>Registrarme</button>
-                <button className="btn btn-primary btn-lg col-lg-6 col-sm-12" type="button" onClick={login} disabled={!email || !password}>Iniciar sesión</button>
+                <button className="btn btn-secondary btn-lg col-lg-6 col-sm-12" type="button" onClick={register} disabled={!inputs.email || !inputs.password}>Registrarme</button>
+                <button className="btn btn-primary btn-lg col-lg-6 col-sm-12" type="button" onClick={login} disabled={!inputs.email || !inputs.password}>Iniciar sesión</button>
               </Fragment>
           }
           </div>
           { error &&
             <div className="col-md-5 form-group mx-auto login-error-msg">
-              <LoginError error={error} />
+              <LoginErrorsParser error={error} />
             </div>
           }
           {
-            msg && 
+            (user && !user.emailVerified) && 
             <div className="col-md-5 form-group mx-auto login-error-msg">
-              <div className="alert alert-success">{msg}</div>
+              <div className="alert alert-success">{`Verifica tu email ${user.email} para poder iniciar sesión`}</div>
             </div>
           }
         </div>

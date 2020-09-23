@@ -41,6 +41,7 @@ const getRandomPoem = (data) => {
 
   data.forEach((item) => {
     var poema = item.val();
+    poema['id'] = item.key;
     poemas.push(poema);
   });
 
@@ -53,6 +54,7 @@ const getRandomPoem = (data) => {
   }).join("<br><br>");
 
   let poem = {
+    id: randomPoem.id,
     text: randomText.text,
     fullText: fullText,
     paragraphs: randomPoem.paragraphs,
@@ -186,5 +188,22 @@ exports.updateIndex = functions.database.ref('/poems/{pushId}').onUpdate((change
 exports.deleteIndex = functions.database.ref('/poems/{pushId}').onDelete((snapshot, context) => {
   collectionIndex.deleteObject(context.params.pushId)
   console.log('Deleted index', context.params.pushId);
+  return null;
+});
+
+exports.createUser = functions.auth.user().onCreate((user) => {
+  admin.database().ref('users').child(user.uid).set({
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      description: "",
+      createdAt: user.metadata.creationTime,
+      favorites: {}
+  });
+  return null;
+});
+
+exports.deleteUser = functions.auth.user().onDelete((user) => {
+  admin.database().ref('users').child(user.uid).remove();
   return null;
 });

@@ -3,11 +3,11 @@ import React, { Fragment } from 'react';
 import { connectHits, InstantSearch, PoweredBy } from 'react-instantsearch-dom';
 // hooks react redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getPoemsAction } from '../redux/poemsDucks';
-import DebouncedSearchBox from './DebouncedSearchBox';
+import { getPoemsAction } from '../../redux/poemsDucks';
+import DebouncedSearchBox from '../DebouncedSearchBox';
 import Poem from './Poem';
 import PoemHits from './PoemHits';
-import GoTopButton from './GoTopButton';
+import GoTopButton from '../GoTopButton';
 
 
 const Poems = ({ showFull }) => {

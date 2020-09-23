@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { Fragment } from 'react';
 import ScrollReveal from 'scrollreveal'
+import Favorite from '../Favorite';
+import SecuredComponent from '../security/SecuredComponent';
 
 const Poem = ({ poem, showFull }) => {
   const slideUp = {
@@ -11,19 +13,23 @@ const Poem = ({ poem, showFull }) => {
   };
   ScrollReveal().reveal('.card', slideUp);
 
-  let text = '';
+  let paragraph = '';
   if (showFull) {
-    text = poem.fullText;
+    paragraph = poem.fullText;
   } else {
-    text = poem.randomParagraph;
+    paragraph = poem.randomParagraph;
   }
 
   return (
     <div className="card shadow-sm poem-card">
       {
+        // Mostrar titulo solo en poemas completos
         showFull &&
         <div className="card-header bg-secondary poem-title text-center font-weight-bold">
           {(poem.id) ? <a href={`/poems/${poem.id}`}>{poem.title}</a> : poem.title}
+          <SecuredComponent>
+            <Favorite poem={poem}/>
+          </SecuredComponent>
         </div>
       }
       <div className="card-body">
@@ -40,13 +46,14 @@ const Poem = ({ poem, showFull }) => {
               )
             })
             : <Fragment>
-              <div className="poem-paragraph" dangerouslySetInnerHTML={{ __html: text }}>
+              <div className="poem-paragraph" dangerouslySetInnerHTML={{ __html: paragraph }}>
               </div>
               <br/>
             </Fragment>
           }
         </div>
         {
+          // Mostrar pie del poema con las redes solo en los completos
           showFull &&
           <div className="text-right">
             <a href={`/poems/author/${poem.author}`} className="author-link"><span className="poem-author">{poem.author}</span></a>
@@ -58,6 +65,7 @@ const Poem = ({ poem, showFull }) => {
           </div>
         }
         {
+          // Mostrar boton ver poema solo en los cortos
           !showFull &&
           <a href={'/poems/' + poem.id} className="btn btn-primary">Ver poema</a>
         }

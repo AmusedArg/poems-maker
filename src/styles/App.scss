@@ -30,6 +30,12 @@ body {
     border-radius: 100%;
     height: 2em;
   }
+  .user-no-picture .jam {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    vertical-align: inherit;
+    margin-right: .2em;
+  }
 }
 
 .login-page {
@@ -172,6 +178,12 @@ body {
   a:hover {
     color: #ffe764;
   }
+  .fav-icon {
+    position: absolute;
+    right: 1em;
+    line-height: inherit;
+    cursor: pointer;
+  }
 }
 .poem-author {
   font-style: normal;
@@ -234,6 +246,31 @@ body {
   }
 }
 
+/** Profile Page **/
+.profile-page-container {
+  .user-pic {
+    font-size: 8rem;
+    margin: 0 auto;
+  }
+  textarea {
+     resize: none;
+  }
+  .list-title {
+    font-size: 1.4rem;
+  }
+  .poem-fav-title {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.8rem;
+    line-height: initial;
+  }
+  .favorites-list a {
+    color: black
+  }
+  .favorites-list li:hover {
+    background-color: #fafafa;
+  }
+}
+
 /** 404 Page **/
 .page-not-found-container {
   background-color: rgb(255, 228, 234);
@@ -248,6 +285,9 @@ body {
     img {
       max-width: 90vw;
     }
+  }
+  .poem-title {
+    font-size: 1.5rem;
   }
 }
 

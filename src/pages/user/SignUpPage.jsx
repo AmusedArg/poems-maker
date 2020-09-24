@@ -1,8 +1,8 @@
 import React, { Fragment, useContext, useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import LoginErrorsParser from '../components/security/LoginErrorsParser';
-import firebase from '../firebase/Firebase';
-import { firebaseAuth } from '../provider/AuthProvider';
+import LoginErrorsParser from '../../components/security/LoginErrorsParser';
+import firebase from '../../firebase/Firebase';
+import { firebaseAuth } from '../../provider/AuthProvider';
 
 const SignUpPage = () => {
   const [requestPending, setRequestPending] = useState(false);

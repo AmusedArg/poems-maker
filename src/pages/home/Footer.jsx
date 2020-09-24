@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { Fragment } from 'react'
-import AuthorsList from '../components/AuthorsList'
+import AuthorsList from '../../components/authors/AuthorsList'
 
 const Footer = () => {
   return (

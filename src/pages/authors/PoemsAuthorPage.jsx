@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Poem from '../components/poems/Poem';
-import { getPoemsByAuthorAction } from '../redux/poemsDucks';
-import GoTopButton from '../components/GoTopButton';
-import Author from '../components/Author';
+import Poem from '../../components/poems/Poem';
+import { getPoemsByAuthorAction } from '../../redux/poemsDucks';
+import GoTopButton from '../../components/GoTopButton';
+import Author from '../../components/authors/Author';
 
-const PoemAuthorPage = () => {
+const PoemsAuthorPage = () => {
 
   let { name } = useParams();
 
@@ -38,4 +38,4 @@ const PoemAuthorPage = () => {
   );
 }
 
-export default PoemAuthorPage;
+export default PoemsAuthorPage;

@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import SecuredComponent from '../components/security/SecuredComponent';
-import UserDropdown from '../components/UserDropdow';
-import { firebaseAuth } from '../provider/AuthProvider';
+import SecuredComponent from '../../components/security/SecuredComponent';
+import UserDropdown from '../../components/UserDropdow';
+import { firebaseAuth } from '../../provider/AuthProvider';
 
 const Header = () => {
   const {isUserValid} = useContext(firebaseAuth);
@@ -27,6 +27,9 @@ const Header = () => {
             </li>
             <li className="nav-item">
               <a href="/random" className="nav-link" >Aleatorio</a>
+            </li>
+            <li className="nav-item">
+              <a href="/contact" className="nav-link" >Contacto</a>
             </li>
             <li className="nav-item">
               <a href="https://twitter.com/PoemasMaker" className="nav-link link-follow-twitter" target="_blank" rel="noopener noreferrer">

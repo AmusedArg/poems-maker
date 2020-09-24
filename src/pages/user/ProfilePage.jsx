@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import SecuredComponent from '../components/security/SecuredComponent';
-import { firebaseAuth } from '../provider/AuthProvider';
+import SecuredComponent from '../../components/security/SecuredComponent';
+import { firebaseAuth } from '../../provider/AuthProvider';
 
 const ProfilePage = () => {
   const { user } = useContext(firebaseAuth);

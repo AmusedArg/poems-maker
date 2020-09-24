@@ -29,8 +29,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && firebase deploy",
-    "deploy-hosting": "react-scripts build && firebase deploy --only hosting"
+    "deploy": "dotenv -e .env react-scripts build && firebase deploy",
+    "deploy-hosting": "dotenv -e .env react-scripts build && firebase deploy --only hosting"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "redux-devtools": "^3.7.0"
   }
 }

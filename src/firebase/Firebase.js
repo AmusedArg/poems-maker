@@ -14,7 +14,11 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 firebase.initializeApp(config);
-firebase.analytics();
+const analytics = firebase.analytics();
+
+export const log = (key, value) => {
+  analytics.logEvent(key, value);
+}
 
 export default {
   config,

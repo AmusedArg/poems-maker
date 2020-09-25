@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import LoginErrorsParser from '../../components/security/LoginErrorsParser';
-import firebase from '../../firebase/Firebase';
+import firebase, { log } from '../../firebase/Firebase';
 import { firebaseAuth } from '../../provider/AuthProvider';
 
 const SignUpPage = () => {
@@ -19,13 +19,15 @@ const SignUpPage = () => {
   }
 
   const register = async (e) => {
+    log('click_btn_register');
     e.preventDefault();
     setRequestPending(true);
     await handleRegister(inputs.email, inputs.password, setError, setUser);
     setRequestPending(false);
   }
-
+  
   const login = async (e) => {
+    log('click_btn_login');
     e.preventDefault();
     setRequestPending(true);
     await handleLogin(inputs.email, inputs.password, setError, setUser);

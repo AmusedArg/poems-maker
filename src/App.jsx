@@ -1,5 +1,5 @@
-import React, { Fragment, useContext } from 'react';
-import { Provider } from 'react-redux';
+import React, { Fragment, useContext, useEffect } from 'react';
+import { Provider, useDispatch } from 'react-redux';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -7,16 +7,18 @@ import {
 } from "react-router-dom";
 import Poems from './components/poems/Poems';
 import AuthorsPage from './pages/authors/AuthorsPage';
+import PoemsAuthorPage from './pages/authors/PoemsAuthorPage';
+import ContactPage from './pages/ContactPage';
 import Footer from './pages/home/Footer';
 import Header from './pages/home/Header';
 import Home from './pages/home/Home';
 import PageNotFound from './pages/PageNotFound';
-import PoemsAuthorPage from './pages/authors/PoemsAuthorPage';
 import PoemPage from './pages/poems/PoemPage';
-import ProfilePage from './pages/user/ProfilePage';
 import RandomPoemPage from './pages/poems/RandomPoemPage';
+import ProfilePage from './pages/user/ProfilePage';
 import SignUpPage from './pages/user/SignUpPage';
 import { firebaseAuth } from './provider/AuthProvider';
+import { configAction } from './redux/appConfigDucks';
 import generateStore from './redux/store';
 import './styles/App.scss';
 
@@ -32,6 +34,13 @@ const AppWrapper = () => {
 
 function App() {
   const { isUserValid } = useContext(firebaseAuth)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getConfig = () => {
+      dispatch(configAction());
+    };
+    getConfig();
+  }, [dispatch])
 
   return (
     <Fragment>
@@ -60,6 +69,9 @@ function App() {
           <Route path="/random">
             <RandomPoemPage />
           </Route>
+          <Route path="/contact">
+            <ContactPage />
+          </Route>
           <Route path="/register">
             {isUserValid() ? <Redirect to="/" /> : <SignUpPage />}
           </Route>
@@ -68,8 +80,8 @@ function App() {
           </Route>
           <Route component={PageNotFound} />
         </Switch>
+        <Footer />
       </Router>
-      <Footer />
     </Fragment>
   );
 }

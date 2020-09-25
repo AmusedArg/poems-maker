@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { Fragment } from 'react'
 import AuthorsList from '../../components/authors/AuthorsList'
+import Sections from './Sections'
 
 const Footer = () => {
   return (
@@ -17,10 +18,7 @@ const Footer = () => {
             <div className="col-xs-6 col-md-3">
               <h6>Secciones</h6>
               <ul className="footer-links">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/poems">Poemas</a></li>
-                <li><a href="/authors">Autores</a></li>
-                <li><a href="/random">Poema Aleatorio</a></li>
+                <Sections />
                 <li><a href="https://twitter.com/PoemasMaker" target="_blank" rel="noopener noreferrer">Twitter Bot</a></li>
               </ul>
             </div>

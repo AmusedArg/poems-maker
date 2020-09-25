@@ -207,3 +207,38 @@ exports.deleteUser = functions.auth.user().onDelete((user) => {
   admin.database().ref('users').child(user.uid).remove();
   return null;
 });
+
+exports.contact = functions.runWith({ timeoutSeconds: 15, memory: '128MB'}).https.onRequest(async (request, response) => {
+  const allowedOrigins = ['http://localhost:3000', 'https://poemasmaker.web.app'];
+  const origin = request.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    response.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  if (request.method === 'OPTIONS') {
+    // Send response to OPTIONS requests
+    response.set('Access-Control-Allow-Methods', 'POST');
+    response.set('Access-Control-Allow-Headers', 'Content-Type');
+    response.set('Access-Control-Max-Age', '3600');
+    response.status(204).send('');
+  } else {
+    const nombre = request.body.nombre;
+    const email = request.body.email;
+    const comentario = request.body.comentario;
+    try {
+      if (nombre.length > 50) {throw (new Error('Invalid Data'))}
+      if (email.length > 200) {throw (new Error('Invalid Data'))}
+      if (comentario.length > 500) {throw (new Error('Invalid Data'))}
+      await admin.database().ref().child('comments').push().set({
+        nombre: nombre,
+        email: email,
+        comentario: comentario,
+        createdAt: admin.database.ServerValue.TIMESTAMP
+      });
+      response.status(200).end();
+    } catch(e) {
+      console.error(e);
+      response.status(500).end();
+    }
+  }
+  return null;
+});

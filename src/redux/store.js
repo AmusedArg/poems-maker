@@ -4,13 +4,15 @@ import poemReducer from './poemDucks';
 import poemsReducer from './poemsDucks';
 import authorsReducer from './authorsDucks';
 import authorizerReducer from './authorizerDucks';
+import configReducer from './appConfigDucks';
 
 
 const rootReducer = combineReducers({
   poems: poemsReducer,
   poem: poemReducer,
   authors: authorsReducer,
-  user: authorizerReducer
+  user: authorizerReducer,
+  config: configReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

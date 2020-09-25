@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuthorsAction } from '../redux/authorsDucks';
+import { getAuthorsAction } from '../../redux/authorsDucks';
 
 const AuthorsList = () => {
   const dispatch = useDispatch();

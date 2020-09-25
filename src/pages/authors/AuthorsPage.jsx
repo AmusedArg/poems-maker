@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import Author from '../components/Author';
-import { getCachedPoems } from '../redux/poemsDucks';
+import Author from '../../components/authors/Author';
+import { getCachedPoems } from '../../redux/poemsDucks';
 
 
 const AuthorsPage = () => {

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getRandomPoemAction } from '../redux/poemDucks';
-import Poem from '../components/poems/Poem';
+import { getRandomPoemAction } from '../../redux/poemDucks';
+import Poem from '../../components/poems/Poem';
 
 const RandomPoemPage = () => {
 

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React, { Fragment } from 'react';
 import ScrollReveal from 'scrollreveal'
+import { log } from '../../firebase/Firebase';
 import Favorite from '../Favorite';
 import SecuredComponent from '../security/SecuredComponent';
 
@@ -26,7 +27,7 @@ const Poem = ({ poem, showFull }) => {
         // Mostrar titulo solo en poemas completos
         showFull &&
         <div className="card-header bg-secondary poem-title text-center font-weight-bold">
-          {(poem.id) ? <a href={`/poems/${poem.id}`}>{poem.title}</a> : poem.title}
+          {(poem.id) ? <a href={`/poems/${poem.id}`} onClick={()=>log('click_poem_title', {poem: poem.title})}>{poem.title}</a> : poem.title}
           <SecuredComponent>
             <Favorite poem={poem}/>
           </SecuredComponent>

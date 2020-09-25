@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { log } from '../../firebase/Firebase';
 
 const Author = ({ poem, name }) => {
   const authors = useSelector(state => state.authors.list);
@@ -31,7 +32,7 @@ const Author = ({ poem, name }) => {
             {
               picture && <img src={picture} alt={name} className="small-author-pic d-md-none" />
             }
-            <a href={`/poems/author/${name}`}>{name}</a>
+            <a href={`/poems/author/${name}`} onClick={()=>log('click_author_name', {author: name})}>{name}</a>
             </h5>
             <p>{summary}</p>
           </div>

@@ -1,8 +1,8 @@
 import React, { Fragment, useContext } from 'react';
-import { NavLink } from 'react-router-dom';
-import SecuredComponent from '../components/security/SecuredComponent';
-import UserDropdown from '../components/UserDropdow';
-import { firebaseAuth } from '../provider/AuthProvider';
+import SecuredComponent from '../../components/security/SecuredComponent';
+import UserDropdown from '../../components/UserDropdow';
+import { firebaseAuth } from '../../provider/AuthProvider';
+import Sections from './Sections';
 
 const Header = () => {
   const {isUserValid} = useContext(firebaseAuth);
@@ -16,18 +16,7 @@ const Header = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <NavLink to="/" className="nav-link" activeClassName="active">Inicio</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/poems" className="nav-link" activeClassName="active">Poemas</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/authors" className="nav-link" activeClassName="active">Autores</NavLink>
-            </li>
-            <li className="nav-item">
-              <a href="/random" className="nav-link" >Aleatorio</a>
-            </li>
+            <Sections />
             <li className="nav-item">
               <a href="https://twitter.com/PoemasMaker" className="nav-link link-follow-twitter" target="_blank" rel="noopener noreferrer">
                 <span className="jam jam-twitter"></span>

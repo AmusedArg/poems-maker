@@ -25,12 +25,13 @@
     "scrollreveal": "^4.0.7"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "dotenv -e .env.dev react-scripts start",
+    "build": "dotenv -e .env.dev react-scripts build",
+    "build-prod": "dotenv -e .env.prod react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "dotenv -e .env react-scripts build && firebase deploy",
-    "deploy-hosting": "dotenv -e .env react-scripts build && firebase deploy --only hosting"
+    "deploy": "dotenv -e .env.prod react-scripts build && firebase deploy",
+    "deploy-hosting": "dotenv -e .env.prod react-scripts build && firebase deploy --only hosting"
   },
   "eslintConfig": {
     "extends": "react-app"

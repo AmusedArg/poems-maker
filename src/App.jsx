@@ -1,30 +1,32 @@
-import React, { Fragment, useContext } from 'react';
-import { Provider } from 'react-redux';
+import React, { Fragment, useContext, useEffect } from 'react';
+import { Provider, useDispatch } from 'react-redux';
 import {
   BrowserRouter as Router,
   Redirect,
   Route, Switch
 } from "react-router-dom";
 import Poems from './components/poems/Poems';
-import AuthorsPage from './pages/AuthorsPage';
-import Footer from './pages/Footer';
-import Header from './pages/Header';
-import Home from './pages/Home';
+import AuthorsPage from './pages/authors/AuthorsPage';
+import PoemsAuthorPage from './pages/authors/PoemsAuthorPage';
+import ContactPage from './pages/ContactPage';
+import Footer from './pages/home/Footer';
+import Header from './pages/home/Header';
+import Home from './pages/home/Home';
 import PageNotFound from './pages/PageNotFound';
-import PoemAuthorPage from './pages/PoemAuthorPage';
-import PoemPage from './pages/PoemPage';
-import ProfilePage from './pages/ProfilePage';
-import RandomPoemPage from './pages/RandomPoemPage';
-import SignUpPage from './pages/SignUpPage';
+import PoemPage from './pages/poems/PoemPage';
+import RandomPoemPage from './pages/poems/RandomPoemPage';
+import ProfilePage from './pages/user/ProfilePage';
+import SignUpPage from './pages/user/SignUpPage';
 import { firebaseAuth } from './provider/AuthProvider';
+import { configAction } from './redux/appConfigDucks';
 import generateStore from './redux/store';
 import './styles/App.scss';
 
 const AppWrapper = () => {
   const store = generateStore();
-  
+
   return (
-    <Provider store={store}> 
+    <Provider store={store}>
       <App />
     </Provider>
   )
@@ -32,6 +34,13 @@ const AppWrapper = () => {
 
 function App() {
   const { isUserValid } = useContext(firebaseAuth)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getConfig = () => {
+      dispatch(configAction());
+    };
+    getConfig();
+  }, [dispatch])
 
   return (
     <Fragment>
@@ -50,7 +59,7 @@ function App() {
             <PoemPage />
           </Route>
           <Route exact path="/poems/author/:name">
-            <PoemAuthorPage />
+            <PoemsAuthorPage />
           </Route>
           <Route path="/authors">
             <div className="container poems-container">
@@ -60,6 +69,9 @@ function App() {
           <Route path="/random">
             <RandomPoemPage />
           </Route>
+          <Route path="/contact">
+            <ContactPage />
+          </Route>
           <Route path="/register">
             {isUserValid() ? <Redirect to="/" /> : <SignUpPage />}
           </Route>
@@ -67,9 +79,9 @@ function App() {
             {isUserValid() && <ProfilePage />}
           </Route>
           <Route component={PageNotFound} />
-        </Switch>      
+        </Switch>
+        <Footer />
       </Router>
-      <Footer />
     </Fragment>
   );
 }

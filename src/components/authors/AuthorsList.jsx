@@ -2,6 +2,9 @@ import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthorsAction } from '../../redux/authorsDucks';
 
+/**
+ * List of authors in the footer
+ */
 const AuthorsList = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {

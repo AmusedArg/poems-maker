@@ -4,18 +4,17 @@ import ImageUploader from "react-images-upload";
 import { useDispatch, useSelector } from 'react-redux';
 import SecuredComponent from '../../components/security/SecuredComponent';
 import { firebaseAuth } from '../../provider/AuthProvider';
-import { userConfigDeleteFavPoemAction, userConfigUpdatePhotoAction } from '../../redux/userConfigDucks';
+import { userConfigDeleteFavAction, userConfigUpdatePhotoAction } from '../../redux/userConfigDucks';
 
 const ProfilePage = (props) => {
   const dispatch = useDispatch();
-  const { user } = useContext(firebaseAuth);
+  const { user, token } = useContext(firebaseAuth);
   const userConfig = useSelector(state => state.userConfig.data);
   const [uploading, setUploading] = useState(null);
   
   const onDrop = async (picture) => {
     try {
       setUploading(true);
-      const token = await user.getIdToken(true);
       const base64 = await toBase64(picture[0]);
       const res = await axios.post('https://us-central1-poemasmaker.cloudfunctions.net/uploadPicture', {
         user: token,
@@ -27,10 +26,11 @@ const ProfilePage = (props) => {
     }
   };
 
-  const removeFav = async (poemId) => {
-    const token = await user.getIdToken(true);
-    await axios.delete(`https://poemasmaker.firebaseio.com/users/${user.uid}/favorites/poems/${poemId}.json?auth=${token}`);
-    dispatch(userConfigDeleteFavPoemAction(poemId));
+  const removeFav = async (groupName, key) => {
+    try {
+      await axios.delete(`https://poemasmaker.firebaseio.com/users/${user.uid}/favorites/${groupName}/${key}.json?auth=${token}`);
+      dispatch(userConfigDeleteFavAction(groupName, key));
+    } catch(e) {}
   }
 
   const toBase64 = file => new Promise((resolve, reject) => {
@@ -40,7 +40,7 @@ const ProfilePage = (props) => {
     reader.onerror = error => reject(error);
   });
 
-  const getUserFavs = () => {
+  const getUserFavPoems = () => {
     if (userConfig && userConfig.favorites) {
       return Object.entries(userConfig.favorites.poems);
     } else {
@@ -91,7 +91,7 @@ const ProfilePage = (props) => {
             <ul className="list-group favorites-list">
               <li className="list-group-item bg-primary list-title">Poemas favoritos</li>
               {
-                getUserFavs().map(item => {
+                getUserFavPoems().map(item => {
                   let key = item[0];
                   let poem = item[1];
                   return (
@@ -99,7 +99,7 @@ const ProfilePage = (props) => {
                       <a href={`/poems/${key}`}>
                         <span className="poem-fav-title">{poem.title}</span>
                       </a>
-                      <button className="btn btn-secondary btn-sm float-right" onClick={()=>removeFav(key)}>Quitar</button>
+                      <button className="btn btn-secondary btn-sm float-right" onClick={()=>removeFav('poems', key)}>Quitar</button>
                     </li>
                   )
                 })

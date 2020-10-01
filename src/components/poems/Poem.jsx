@@ -29,7 +29,7 @@ const Poem = ({ poem, showFull }) => {
         <div className="card-header bg-secondary poem-title text-center font-weight-bold">
           {(poem.id) ? <a href={`/poems/${poem.id}`} onClick={()=>log('click_poem_title', {poem: poem.title})}>{poem.title}</a> : poem.title}
           <SecuredComponent>
-            <Favorite poem={poem}/>
+            <Favorite id={poem.id} title={poem.title} groupName="poems"/>
           </SecuredComponent>
         </div>
       }

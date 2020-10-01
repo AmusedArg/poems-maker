@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { firebaseAuth } from '../provider/AuthProvider';
 
 const UserDropdown = () => {
   const {user, handleLogout} = useContext(firebaseAuth);
+  const userConfig = useSelector(state => state.userConfig.data);
   
   const logout = () => {
     handleLogout();
@@ -14,8 +16,8 @@ const UserDropdown = () => {
       <div className="dropdown">
         <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span className="user-loggedin mr-2">
-            {user.photoURL ? 
-              <img src={user.photoURL} alt="user"/> : 
+            {userConfig?.photoURL ? 
+              <img src={userConfig?.photoURL} alt="user"/> : 
               <span className="btn bg-secondary user-no-picture"><span className="jam jam-user-circle"></span>{user.email}</span>}
           </span>
         </a>

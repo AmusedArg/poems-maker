@@ -11,8 +11,8 @@ const Favorite = ({poem}) => {
   const userConfig = useSelector(state => state.userConfig.data);
 
   useEffect(() => {
-    if (userConfig) {
-      for (const fav of  Object.entries(userConfig?.favorites)) {
+    if (userConfig && userConfig.favorites) {
+      for (const fav of  Object.entries(userConfig.favorites.poems)) {
         const poemId = fav[0];
         if (poem.id === poemId) {
           setFav(true);
@@ -25,7 +25,7 @@ const Favorite = ({poem}) => {
     setFav(!isFav);
     if (!isFav) {
       try {
-        const res = await axios.patch(`https://poemasmaker.firebaseio.com/users/${user.uid}/favorites.json?auth=${token}`, {
+        const res = await axios.patch(`https://poemasmaker.firebaseio.com/users/${user.uid}/favorites/poems.json?auth=${token}`, {
           [poem.id]: {
             title: poem.title,
             createdAt: {'.sv': 'timestamp'}
@@ -36,7 +36,7 @@ const Favorite = ({poem}) => {
         setFav(false);
       }
     } else {
-      const res = await axios.delete(`https://poemasmaker.firebaseio.com/users/${user.uid}/favorites/${poem.id}.json?auth=${token}`);
+      const res = await axios.delete(`https://poemasmaker.firebaseio.com/users/${user.uid}/favorites/poems/${poem.id}.json?auth=${token}`);
       if (res.status !== 200) {
         setFav(true);
       } else {

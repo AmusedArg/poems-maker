@@ -44,7 +44,7 @@ export const getUserConfigAction = (user) => async (dispatch, getState) => {
 export const userConfigAddFavPoemAction = (poemId, data) => async (dispatch, getState) => {
   try {
     const userConfig = getState().userConfig?.data;
-    userConfig.favorites[poemId] = data;
+    userConfig['favorites']['poems'][poemId] = data;
     dispatch(updateUserConfig({...userConfig}));
   } catch (e) {
     console.error(e);
@@ -54,10 +54,10 @@ export const userConfigAddFavPoemAction = (poemId, data) => async (dispatch, get
 export const userConfigDeleteFavPoemAction = (poemId) => async (dispatch, getState) => {
   try {
     const userConfig = getState().userConfig?.data;
-    for (const key in userConfig.favorites) {
-      if (userConfig.favorites.hasOwnProperty(key)) {
+    for (const key in userConfig.favorites.poems) {
+      if (userConfig.favorites.poems.hasOwnProperty(key)) {
         if (key === poemId) {
-          delete userConfig.favorites[key];
+          delete userConfig.favorites.poems[key];
           break;
         }
       }

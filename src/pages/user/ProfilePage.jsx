@@ -27,16 +27,9 @@ const ProfilePage = (props) => {
     }
   };
 
-  // const updateFavorites = (res) => {
-  //   if (res.data.favorites) {
-  //     res.data.favorites = Object.entries(res.data.favorites);
-  //     setUserData(res.data);
-  //   }
-  // }
-  
   const removeFav = async (poemId) => {
     const token = await user.getIdToken(true);
-    await axios.delete(`https://poemasmaker.firebaseio.com/users/${user.uid}/favorites/${poemId}.json?auth=${token}`);
+    await axios.delete(`https://poemasmaker.firebaseio.com/users/${user.uid}/favorites/poems/${poemId}.json?auth=${token}`);
     dispatch(userConfigDeleteFavPoemAction(poemId));
   }
 
@@ -48,8 +41,8 @@ const ProfilePage = (props) => {
   });
 
   const getUserFavs = () => {
-    if (userConfig) {
-      return Object.entries(userConfig?.favorites);
+    if (userConfig && userConfig.favorites) {
+      return Object.entries(userConfig.favorites.poems);
     } else {
       return [];
     }

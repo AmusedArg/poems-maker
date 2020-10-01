@@ -7,9 +7,9 @@ import SecuredComponent from '../security/SecuredComponent';
 
 const Poem = ({ poem, showFull }) => {
   const slideUp = {
-    distance: '150%',
+    distance: '50%',
     origin: 'bottom',
-    duration: 1000,
+    duration: 700,
     opacity: null
   };
   ScrollReveal().reveal('.card', slideUp);

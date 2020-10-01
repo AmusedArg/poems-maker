@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const Sections = ({isNavLink}) => {
-  const sections = useSelector(state => state.config.sections);
+  const sections = useSelector(state => state.appConfig.sections);
 
   const goTop = () => {
     window.scrollTo(0, 0);

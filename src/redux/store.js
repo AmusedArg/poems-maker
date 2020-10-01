@@ -3,16 +3,16 @@ import thunk from 'redux-thunk';
 import poemReducer from './poemDucks';
 import poemsReducer from './poemsDucks';
 import authorsReducer from './authorsDucks';
-import authorizerReducer from './authorizerDucks';
-import configReducer from './appConfigDucks';
+import userConfigReducer from './userConfigDucks';
+import appConfigReducer from './appConfigDucks';
 
 
 const rootReducer = combineReducers({
   poems: poemsReducer,
   poem: poemReducer,
   authors: authorsReducer,
-  user: authorizerReducer,
-  config: configReducer
+  userConfig: userConfigReducer,
+  appConfig: appConfigReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

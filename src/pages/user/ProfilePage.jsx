@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ImageUploader from "react-images-upload";
 import { useDispatch, useSelector } from 'react-redux';
 import SecuredComponent from '../../components/security/SecuredComponent';
 import { firebaseAuth } from '../../provider/AuthProvider';
-import { getUserConfigAction, userConfigDeleteFavPoemAction, userConfigUpdatePhotoAction } from '../../redux/userConfigDucks';
+import { userConfigDeleteFavPoemAction, userConfigUpdatePhotoAction } from '../../redux/userConfigDucks';
 
 const ProfilePage = (props) => {
   const dispatch = useDispatch();
@@ -33,13 +33,6 @@ const ProfilePage = (props) => {
   //     setUserData(res.data);
   //   }
   // }
-  
-  useEffect(() => {
-    const getUserConfig = () => {
-      dispatch(getUserConfigAction(user));
-    };
-    getUserConfig();
-  }, [dispatch, user]);  
   
   const removeFav = async (poemId) => {
     const token = await user.getIdToken(true);

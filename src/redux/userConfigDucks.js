@@ -6,12 +6,12 @@ const dataInicial = {
 }
 
 // Types
-const GET_USER_CONFIG = 'GET_USER_CONFIG';
+const UPDATE_USER_CONFIG = 'UPDATE_USER_CONFIG';
 
 // Reducer
 export default function userConfigReducer(state = dataInicial, action) {
   switch (action.type) {
-    case GET_USER_CONFIG:
+    case UPDATE_USER_CONFIG:
       return { ...state, data: action.payload.config }
     default:
       return state;
@@ -19,9 +19,9 @@ export default function userConfigReducer(state = dataInicial, action) {
 }
 
 // Action Creators
-export function getUserConfig(config) {
+export function updateUserConfig(config) {
   return {
-    type: GET_USER_CONFIG,
+    type: UPDATE_USER_CONFIG,
     payload: {
       config: config
     }
@@ -31,9 +31,21 @@ export function getUserConfig(config) {
 // Methods
 export const getUserConfigAction = (user) => async (dispatch, getState) => {
   try {
-    const token = await user.getIdToken(true);
-    const res = await axios.get(`https://poemasmaker.firebaseio.com/users/${user.uid}.json?auth=${token}`);
-    dispatch(getUserConfig(res.data));
+    if (user) {
+      const token = await user.getIdToken(true);
+      const res = await axios.get(`https://poemasmaker.firebaseio.com/users/${user.uid}.json?auth=${token}`);
+      dispatch(updateUserConfig(res.data));
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export const userConfigAddFavPoemAction = (poemId, data) => async (dispatch, getState) => {
+  try {
+    const userConfig = getState().userConfig?.data;
+    userConfig.favorites[poemId] = data;
+    dispatch(updateUserConfig({...userConfig}));
   } catch (e) {
     console.error(e);
   }
@@ -50,7 +62,7 @@ export const userConfigDeleteFavPoemAction = (poemId) => async (dispatch, getSta
         }
       }
     }
-    dispatch(getUserConfig({...userConfig}));
+    dispatch(updateUserConfig({...userConfig}));
   } catch (e) {
     console.error(e);
   }
@@ -60,7 +72,7 @@ export const userConfigUpdatePhotoAction = (photoURL) => async (dispatch, getSta
   try {
     const userConfig = getState().userConfig?.data;
     userConfig.photoURL = photoURL;
-    dispatch(getUserConfig({...userConfig}));
+    dispatch(updateUserConfig({...userConfig}));
   } catch (e) {
     console.error(e);
   }

@@ -1,46 +1,56 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const { default: algoliasearch } = require('algoliasearch');
-admin.initializeApp();
+const serviceAccount = require("./serviceAccountKey.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: "poemasmaker.appspot.com",
+  databaseURL: "https://poemasmaker.firebaseio.com"
+});
 
-const algoliaClient = algoliasearch(functions.config().algolia.appid, functions.config().algolia.apikey);
-const collectionIndexName = 'dev_POEMS';
-const collectionIndex = algoliaClient.initIndex(collectionIndexName);
-
-exports.sendCollectionToAlgolia = functions.runWith({
+exports.uploadPicture = functions.runWith({
   timeoutSeconds: 60,
   memory: '512MB'
-}).https.onRequest((req, res) => {
-  const algoliaRecords = [];
-
-  const ref = admin.database().ref('poems');
-  ref.once("value", (snapshot) => {
-    snapshot.forEach((item) => {
-      const p = item.val();
-      console.log('Indexing...', JSON.stringify(p));
-      algoliaRecords.push({
-        objectID: item.key,
-        title: p.title,
-        author: p.author,
-        instagram: p.instagram,
-        twitter: p.twitter,
-        website: p.website,
-        content: p.paragraphs
+}).https.onRequest(async (req, res) => {
+  const bucket = admin.storage().bucket();
+  const allowedOrigins = ['http://localhost:3000', 'https://poemasmaker.web.app'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  if (req.method === 'OPTIONS') {
+    // Send response to OPTIONS requests
+    res.set('Access-Control-Allow-Methods', 'POST');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.set('Access-Control-Max-Age', '3600');
+    res.status(204).send('');
+  } else {
+    try {
+      const idToken = req.body.user;
+      const decodedToken = await admin.auth().verifyIdToken(idToken)
+      const imageBuffer = Buffer.from(req.body.file, 'base64')
+      const imageByteArray = new Uint8Array(imageBuffer);
+      const file = bucket.file(`${decodedToken.uid}/picture/profile_photo.png`);
+      const options = { resumable: false, metadata: { contentType: "image/jpg" } }
+      await file.save(imageByteArray, options);
+      await file.makePublic();
+      const metadata = await file.getMetadata();
+      const url = metadata[0].mediaLink;
+      await admin.database().ref('users').child(decodedToken.uid).update({
+        photoURL: url
       });
-    });
-
-    collectionIndex.saveObjects(algoliaRecords, { autoGenerateObjectIDIfNotExist: true }).then(() => {
-      res.status(200).send("Poems was indexed to Algolia successfully.");
-      return null;
-    }).catch((e) => { console.error(e); res.status(500) });
-  });
-})
+      res.status(200).send(url).end();
+    } catch(e) {
+      console.error(e);
+      res.status(500).end();
+    }
+  }
+});
 
 const getRandomPoem = (data) => {
   const poemas = [];
 
   data.forEach((item) => {
-    var poema = item.val();
+    let poema = item.val();
     poema['id'] = item.key;
     poemas.push(poema);
   });

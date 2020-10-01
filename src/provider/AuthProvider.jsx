@@ -9,6 +9,7 @@ const AuthProvider = (props) => {
   const [inputs, setInputs] = useState(initState)
   const [error, setError] = useState(null)
   const [user, setUser] = useState(null)
+  const [token, setToken] = useState(null)
 
   const handleRegister = async () => {
     await authMethods.register(inputs.email, inputs.password, setError, setUser);
@@ -27,7 +28,9 @@ const AuthProvider = (props) => {
 
   React.useEffect(() => {
     Firebase.auth().onAuthStateChanged(
-      (user) => {setUser(user);}
+      async (user) => {
+        setUser(user);
+        setToken(await user.getIdToken(true));}
     );
   }, [])
 
@@ -35,6 +38,7 @@ const AuthProvider = (props) => {
     <firebaseAuth.Provider
       value={{
         user,
+        token,
         inputs,
         error,
         setInputs,

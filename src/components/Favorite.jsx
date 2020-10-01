@@ -11,7 +11,7 @@ const Favorite = ({id, title, groupName}) => {
   const userConfig = useSelector(state => state.userConfig.data);
 
   useEffect(() => {
-    if (userConfig && userConfig.favorites) {
+    if (userConfig && userConfig.favorites && userConfig.favorites[groupName]) {
       for (const fav of  Object.entries(userConfig.favorites[groupName])) {
         const _id = fav[0];
         if (_id === id) {

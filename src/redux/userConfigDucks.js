@@ -44,6 +44,7 @@ export const getUserConfigAction = (user) => async (dispatch, getState) => {
 export const userConfigAddFavAction = (groupName, key, data) => async (dispatch, getState) => {
   try {
     const userConfig = getState().userConfig?.data;
+    userConfig['favorites'][groupName] = {};
     userConfig['favorites'][groupName][key] = data;
     dispatch(updateUserConfig({...userConfig}));
   } catch (e) {

@@ -48,13 +48,21 @@ const ProfilePage = (props) => {
     }
   }
 
+  const getUserFavAuthors = () => {
+    if (userConfig && userConfig.favorites) {
+      return Object.entries(userConfig.favorites.authors);
+    } else {
+      return [];
+    }
+  }
+
   return (
     <SecuredComponent>
       <div className="container-fluid profile-page-container">
         <div className="row">
           <div className="card my-3 col-lg-5 col-md-6">
             <div className="row no-gutters">
-              <div className="align-self-center col-md-4 d-flex">
+              <div className="align-self-center col-md-4 d-flex mt-3 mt-md-0">
                 {
                   uploading ? 
                     <div className="spinner spinner-grow text-secondary" role="status"><span className="sr-only">Loading...</span></div> 
@@ -100,6 +108,24 @@ const ProfilePage = (props) => {
                         <span className="poem-fav-title">{poem.title}</span>
                       </a>
                       <button className="btn btn-secondary btn-sm float-right" onClick={()=>removeFav('poems', key)}>Quitar</button>
+                    </li>
+                  )
+                })
+              }
+            </ul>
+            <br/>
+            <ul className="list-group favorites-list">
+              <li className="list-group-item bg-primary list-title">Autores favoritos</li>
+              {
+                getUserFavAuthors().map(item => {
+                  let key = item[0];
+                  let author = item[1];
+                  return (
+                    <li className="list-group-item" key={key}>
+                      <a href={`/authors/${key}`}>
+                        <span className="poem-fav-title">{author.title}</span>
+                      </a>
+                      <button className="btn btn-secondary btn-sm float-right" onClick={()=>removeFav('authors', key)}>Quitar</button>
                     </li>
                   )
                 })

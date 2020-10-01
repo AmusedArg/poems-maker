@@ -29,7 +29,7 @@ exports.uploadPicture = functions.runWith({
       const decodedToken = await admin.auth().verifyIdToken(idToken)
       const imageBuffer = Buffer.from(req.body.file, 'base64')
       const imageByteArray = new Uint8Array(imageBuffer);
-      const file = bucket.file(`${decodedToken.uid}/picture/profile_photo.png`);
+      const file = bucket.file(`users/${decodedToken.uid}/picture/profile_photo.png`);
       const options = { resumable: false, metadata: { contentType: "image/jpg" } }
       await file.save(imageByteArray, options);
       await file.makePublic();

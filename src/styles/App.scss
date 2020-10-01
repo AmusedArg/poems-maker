@@ -216,6 +216,12 @@ body {
 .author-card {
   .poem-author {
     font-size: 2rem;
+    .fav-icon {
+      color: $secondary;
+      cursor: pointer;
+      margin-left: .5em;
+      vertical-align: text-top;
+    }
   }
   .author-pic {
     border-radius: 100%;

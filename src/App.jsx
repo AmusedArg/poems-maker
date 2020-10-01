@@ -20,6 +20,7 @@ import SignUpPage from './pages/user/SignUpPage';
 import { firebaseAuth } from './provider/AuthProvider';
 import { configAction } from './redux/appConfigDucks';
 import generateStore from './redux/store';
+import { getUserConfigAction } from './redux/userConfigDucks';
 import './styles/App.scss';
 
 const AppWrapper = () => {
@@ -33,14 +34,22 @@ const AppWrapper = () => {
 }
 
 function App() {
-  const { isUserValid } = useContext(firebaseAuth)
+  const { user, isUserValid } = useContext(firebaseAuth)
   const dispatch = useDispatch();
+  
   useEffect(() => {
     const getConfig = () => {
       dispatch(configAction());
     };
     getConfig();
-  }, [dispatch])
+  }, [dispatch]);
+
+  useEffect(() => {
+    const getUserConfig = () => {
+      dispatch(getUserConfigAction(user));
+    };
+    getUserConfig();
+  }, [dispatch, user]); 
 
   return (
     <Fragment>

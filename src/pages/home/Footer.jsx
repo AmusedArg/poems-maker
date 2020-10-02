@@ -39,8 +39,8 @@ const Footer = () => {
                 <a href="/"> Poemas Maker</a>.
               </p>
               <br />
-              <p>
-                <img src="react-logo.png" height="64px" alt="React" /> <img src="firebase-logo.png" height="64px" alt="firebase" />
+              <p className="logos-container">
+                <img src="react-logo.png" height="64px" alt="React" className="react-logo" /> <img src="firebase-logo.png" height="64px" alt="firebase" className="firebase-logo"/>
               </p>
             </div>
             <div className="col-md-4 col-sm-6 col-xs-12">

@@ -20,6 +20,16 @@
   letter-spacing:2px
 }
 
+.logos-container {
+  .react-logo {
+    background: #268082a1;
+    padding: 0.2em;
+    border-radius: 3px;
+    width: 143px;
+    object-fit: contain;
+  }
+}
+
 .footer-links {
   padding-left:0;
   list-style:none;

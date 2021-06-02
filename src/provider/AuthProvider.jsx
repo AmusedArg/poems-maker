@@ -30,7 +30,10 @@ const AuthProvider = (props) => {
     Firebase.auth().onAuthStateChanged(
       async (user) => {
         setUser(user);
-        setToken(await user.getIdToken(true));}
+        if (user) {
+          setToken(await user.getIdToken(true));
+        }
+      }
     );
   }, [])
 

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { log } from '../../firebase/Firebase';
 import Favorite from '../Favorite';

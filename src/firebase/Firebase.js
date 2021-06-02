@@ -20,8 +20,10 @@ export const log = (key, value) => {
   analytics.logEvent(key, value);
 }
 
-export default {
+const FirebaseConfig = {
   config,
   auth: firebase.auth,
   googleProviderId: firebase.auth.GoogleAuthProvider.PROVIDER_ID
 };
+
+export default FirebaseConfig;
